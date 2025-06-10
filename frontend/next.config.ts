@@ -8,9 +8,9 @@ const withPWA = require("next-pwa")({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
-	// Add Webpack alias for @
 	webpack(config) {
 		config.resolve.alias["@"] = require("path").resolve(__dirname, "src")
+		config.resolve.extensions = [".tsx", ".ts", ".js", ".jsx"]
 		return config
 	},
 }
