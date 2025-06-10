@@ -1,14 +1,18 @@
-// next.config.js
 const withPWA = require("next-pwa")({
-	dest: "public", // Carpeta donde se generarán los archivos del Service Worker
-	disable: process.env.NODE_ENV === "development", // Desactiva PWA en desarrollo para evitar conflictos
-	register: true, // Registra automáticamente el Service Worker
-	skipWaiting: true, // Fuerza la activación inmediata del nuevo Service Worker
+	dest: "public",
+	disable: process.env.NODE_ENV === "development",
+	register: true,
+	skipWaiting: true,
 })
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	reactStrictMode: true, // Mantiene la configuración predeterminada
+	reactStrictMode: true,
+	// Add Webpack alias for @
+	webpack(config) {
+		config.resolve.alias["@"] = require("path").resolve(__dirname, "src")
+		return config
+	},
 }
 
 module.exports = withPWA(nextConfig)
