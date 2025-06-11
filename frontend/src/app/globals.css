@@ -4,8 +4,6 @@
 
 @import "tw-animate-css";
 
-@tailwind utilities;
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -60,6 +58,7 @@
 	--primary-foreground: oklch(0.984 0.003 247.858);
 	--secondary: oklch(0.968 0.007 247.896);
 	--secondary-foreground: oklch(0.208 0.042 265.755);
+	--spacing: 0.5rem;
 	--muted: oklch(0.968 0.007 247.896);
 	--muted-foreground: oklch(0.554 0.046 257.417);
 	--accent: oklch(0.968 0.007 247.896);
@@ -115,13 +114,4 @@
 	--sidebar-accent-foreground: oklch(0.984 0.003 247.858);
 	--sidebar-border: oklch(1 0 0 / 10%);
 	--sidebar-ring: oklch(0.551 0.027 264.364);
-}
-
-@layer base {
-	* {
-		@apply border-border outline-ring/50;
-	}
-	body {
-		@apply bg-background text-foreground;
-	}
 }
