@@ -63,6 +63,10 @@
 	--radius-xl: calc(var(--radius) + 4px);
 }
 
+html {
+  font-size: var(--font-size, 16px);
+}
+
 :root {
 	--radius: 0.625rem;
 	--background: oklch(1 0 0);

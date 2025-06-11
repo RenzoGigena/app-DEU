@@ -27,7 +27,8 @@
 		"react-dom": "^19.0.0",
 		"react-hook-form": "^7.57.0",
 		"tailwind-merge": "^3.3.0",
-		"zod": "^3.25.57"
+		"zod": "^3.25.57",
+		"zustand": "^5.0.5"
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3",
@@ -38,7 +39,7 @@
 		"@typescript-eslint/eslint-plugin": "^6.15.0",
 		"@typescript-eslint/parser": "^6.15.0",
 		"autoprefixer": "^10.4.21",
-		"eslint": "^9",
+		"eslint": "^8.57.1",
 		"eslint-config-next": "^15.3.3",
 		"postcss": "^8.5.4",
 		"tailwindcss": "^4.1.8",
