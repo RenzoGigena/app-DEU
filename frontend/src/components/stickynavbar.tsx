@@ -29,6 +29,7 @@ export default function StickyNavbar() {
 							{ href: "/", label: "Bienvenida" },
 							{ href: "/balnearios", label: "Balnearios" },
 							{ href: "/unirse", label: "Unirse" },
+							{ href: "/configuracion", label: "Configuración" },
 						].map(({ href, label }) => (
 							<NavigationMenuItem key={href}>
 								<NavigationMenuLink asChild>
@@ -57,6 +58,7 @@ export default function StickyNavbar() {
 								{ href: "/", label: "Bienvenida" },
 								{ href: "/balnearios", label: "Balnearios" },
 								{ href: "/unirse", label: "Unirse" },
+								{ href: "/configuracion", label: "Configuración" },
 							].map(({ href, label }) => (
 								<Link
 									key={href}
