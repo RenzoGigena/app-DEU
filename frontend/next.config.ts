@@ -1,18 +1,26 @@
-const withPWA = require("next-pwa")({
-	dest: "public",
-	disable: process.env.NODE_ENV === "development",
-	register: true,
-	skipWaiting: true,
-})
+import path from 'path'
+import { Configuration } from 'webpack'
+import withPWA from 'next-pwa'
 
-/** @type {import('next').NextConfig} */
+const isDev = process.env.NODE_ENV === 'development'
+
 const nextConfig = {
-	reactStrictMode: true,
-	webpack(config) {
-		config.resolve.alias["@"] = require("path").resolve(__dirname, "src")
-		config.resolve.extensions = [".tsx", ".ts", ".js", ".jsx"]
-		return config
-	},
+  reactStrictMode: true,
+  webpack(config: Configuration) {
+    if (config.resolve) {
+      config.resolve.alias = {
+        ...(config.resolve.alias || {}),
+        '@': path.resolve(__dirname, 'src'),
+      }
+      config.resolve.extensions = ['.tsx', '.ts', '.js', '.jsx']
+    }
+    return config
+  },
 }
 
-module.exports = withPWA(nextConfig)
+export default withPWA({
+  dest: 'public',
+  disable: isDev,
+  register: true,
+  skipWaiting: true,
+})(nextConfig)
