@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 		<html lang="es" suppressHydrationWarning>
 			<body className="bg-background text-foreground">
 				<StickyNavbar />
-				<main className="max-w-7xl mx-auto px-4 py-8">{children}</main>
+				<main className="mx-auto">{children}</main>
 			</body>
 		</html>
 	)

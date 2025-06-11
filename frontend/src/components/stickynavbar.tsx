@@ -15,66 +15,60 @@ import React from "react"
 
 export default function StickyNavbar() {
 	return (
-		<header className="sticky top-0 z-50 w-full border-b bg-slate-100 py-6 shadow-sm">
-			<div className="container mx-auto flex items-center justify-between px-3">
+		<header className="sticky top-0 z-50 w-full border-b bg-slate-50/95 backdrop-blur-md py-4 shadow-sm">
+			<div className="container mx-auto flex items-center justify-between px-4">
 				{/* Logo */}
-				<Link href="/" className="text-2xl font-semibold">
+				<Link href="/" className="text-2xl font-bold tracking-tight">
 					Balnearios Río de la Plata
 				</Link>
 
-				{/* Navegación y menú */}
-				<div className="flex items-center gap-3">
-					{/* Navegación en desktop */}
-					<NavigationMenu className="hidden lg:flex">
-						<NavigationMenuList className="gap-6">
+				{/* Navegación en desktop */}
+				<NavigationMenu className="hidden lg:flex">
+					<NavigationMenuList className="gap-6">
+						{[
+							{ href: "/", label: "Bienvenida" },
+							{ href: "/balnearios", label: "Balnearios" },
+							{ href: "/unirse", label: "Unirse" },
+						].map(({ href, label }) => (
+							<NavigationMenuItem key={href}>
+								<NavigationMenuLink asChild>
+									<Link
+										href={href}
+										className="text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-slate-700 hover:text-slate-800"
+									>
+										{label}
+									</Link>
+								</NavigationMenuLink>
+							</NavigationMenuItem>
+						))}
+					</NavigationMenuList>
+				</NavigationMenu>
+
+				{/* Menú mobile */}
+				<Sheet>
+					<SheetTrigger asChild>
+						<Button variant="ghost" size="icon" className="lg:hidden">
+							<Menu className="h-6 w-6" />
+						</Button>
+					</SheetTrigger>
+					<SheetContent side="right" className="px-6 pt-8">
+						<nav className="flex flex-col gap-6">
 							{[
 								{ href: "/", label: "Bienvenida" },
 								{ href: "/balnearios", label: "Balnearios" },
 								{ href: "/unirse", label: "Unirse" },
 							].map(({ href, label }) => (
-								<NavigationMenuItem key={href}>
-									<NavigationMenuLink asChild>
-										<Link
-											href={href}
-											className="text-sm font-medium hover:underline"
-										>
-											{label}
-										</Link>
-									</NavigationMenuLink>
-								</NavigationMenuItem>
+								<Link
+									key={href}
+									href={href}
+									className="text-base font-medium border-b pb-2 border-slate-200 hover:text-slate-900 transition-colors"
+								>
+									{label}
+								</Link>
 							))}
-						</NavigationMenuList>
-					</NavigationMenu>
-
-					{/* Menú mobile */}
-					<Sheet>
-						<SheetTrigger asChild>
-							<Button variant="ghost" size="icon" className="lg:hidden">
-								<Menu className="h-5 w-5" />
-							</Button>
-						</SheetTrigger>
-						<SheetContent side="right" className="px-6">
-							<nav className="flex flex-col gap-4 mt-8">
-								{[
-									{ href: "/", label: "Bienvenida" },
-									{ href: "/balnearios", label: "Balnearios" },
-									{ href: "/unirse", label: "Unirse" },
-								].map(({ href, label }) => (
-									<Link
-										key={href}
-										href={href}
-										className="text-sm font-medium hover:underline"
-									>
-										{label}
-									</Link>
-								))}
-								<Button variant="default" className="mt-4 w-full">
-									Contacto
-								</Button>
-							</nav>
-						</SheetContent>
-					</Sheet>
-				</div>
+						</nav>
+					</SheetContent>
+				</Sheet>
 			</div>
 		</header>
 	)

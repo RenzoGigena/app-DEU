@@ -1,6 +1,6 @@
 export default function HomePage() {
 	return (
-		<main className="flex-1 max-w-4xl mx-auto w-full px-6 py-10 space-y-6 text-lg leading-relaxed">
+		<main className="flex-1 mx-auto w-full px-6 py-10 space-y-6 text-lg leading-relaxed">
 			<h2 className="text-2xl font-semibold">Bienvenido</h2>
 			<p>
 				Este sitio web tiene como objetivo mostrar información sobre los

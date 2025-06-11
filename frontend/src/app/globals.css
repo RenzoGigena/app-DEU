@@ -1,8 +1,25 @@
 @import "tailwindcss";
-@import "tailwindcss/preflight";
 @import "tailwindcss/utilities";
 
 @import "tw-animate-css";
+
+/* Variables opcionales de colores y fuentes */
+:root {
+	--radius: 0.5rem;
+}
+
+/* Estilos base de Tailwind */
+@layer base {
+	*,
+	::before,
+	::after {
+		@apply border-border;
+	}
+
+	body {
+		@apply bg-background text-foreground font-sans antialiased;
+	}
+}
 
 @custom-variant dark (&:is(.dark *));
 
