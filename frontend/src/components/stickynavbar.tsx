@@ -15,7 +15,7 @@ import React from "react"
 
 export default function StickyNavbar() {
 	return (
-		<header className="sticky top-0 z-50 w-full border-b bg-slate-50/95 backdrop-blur-md py-4 shadow-sm">
+		<header className="sticky top-0 z-50 w-full border-b bg-slate-50/95 backdrop-blur-md py-1 shadow-sm">
 			<div className="container mx-auto flex items-center justify-between px-4">
 				{/* Logo */}
 				<Link href="/" className="text-2xl font-bold tracking-tight">
@@ -34,7 +34,7 @@ export default function StickyNavbar() {
 								<NavigationMenuLink asChild>
 									<Link
 										href={href}
-										className="text-base font-medium transition-all duration-200 border-b-2 border-transparent hover:border-slate-700 hover:text-slate-800"
+										className="text-base font-medium transition-all duration-200 border-b-2 border-2 hover:border-slate-700 hover:text-slate-800"
 									>
 										{label}
 									</Link>
