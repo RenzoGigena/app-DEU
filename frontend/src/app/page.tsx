@@ -8,12 +8,15 @@ export default function HomePage() {
 			<section className="items-center text-center">
 				<h2 className="text-3xl font-bold text-primary mb-4">Bienvenido</h2>
 				<p className="text-muted-foreground">
-					Este sitio web tiene como objetivo brindar información actualizada
-					sobre los balnearios y zonas costeras del sur del Río de La Plata.
+					Este sitio web tiene como objetivo principal brindar información actualizada sobre
+					la contaminacion en balnearios y zonas costeras de la rivera sur del Rio
+					de La Plata, en la provincia de Buenos Aires, Argentina.
+					Tambien puede consultar informacion sobre servicios con los que cuenta cada balneario e
+					incluso ver comentarios de otros usuarios.
 				</p>
 				<p className="text-muted-foreground mt-2">
 					Forma parte de un proyecto desarrollado en la cátedra de Diseño de
-					Experiencia de Usuario de la Facultad de Informática (UNLP), año 2025.
+					Experiencia de Usuario de la Facultad de Informática (UNLP) en el año 2025.
 				</p>
 			</section>
 
@@ -22,9 +25,10 @@ export default function HomePage() {
 					Evitá enfermarte
 				</h3>
 				<p className="text-muted-foreground">
-					Conocé más sobre las bacterias <strong>Enterococos</strong> y{" "}
-					<strong>Escherichia Coli</strong>, cómo llegan al agua y qué efectos
-					tienen sobre tu salud.
+					En muchas zonas costeras, el agua y la arena pueden estar contaminadas con bacterias como <strong>Escherichia coli</strong> y <strong>Enterococos</strong>, 
+					que provienen principalmente de desechos cloacales. Aunque suelen asociarse con el agua, estudios demuestran que estas bacterias pueden <strong>sobrevivir durante más tiempo en la arena</strong>, representando un riesgo incluso fuera del mar. 
+					<br className="hidden sm:inline" />
+					Consulta en este sitio web sobre el lugar que quieres visitar para informarte sobre su estado!
 				</p>
 			</section>
 
