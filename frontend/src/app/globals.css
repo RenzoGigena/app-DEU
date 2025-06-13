@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tailwindcss/utilities";
-
 @import "tw-animate-css";
 
 /* Variables opcionales de colores y fuentes */
@@ -135,4 +134,34 @@ html {
 	--sidebar-accent-foreground: oklch(0.984 0.003 247.858);
 	--sidebar-border: oklch(1 0 0 / 10%);
 	--sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+/* Tema verde */
+.theme-green {
+  --primary: #28a745;
+  --secondary: #1e7e34;
+  --accent: #71db84;
+}
+
+/* Tema naranja */
+.theme-orange {
+  --primary: #fd7e14;
+  --secondary: #c05600;
+  --accent: #ffb066;
+}
+
+/* Tema azul (por si querés explícitamente tenerlo también) */
+.theme-blue {
+  --primary: #007bff;
+  --secondary: #0056b3;
+  --accent: #66bfff;
+}
+
+/* Modo daltónico: alto contraste, colores accesibles */
+.theme-daltonic {
+  --primary: #000000;
+  --secondary: #ffffff;
+  --accent: #ffff00;
+  --background: #fdfdfd;
+  --text: #000;
 }

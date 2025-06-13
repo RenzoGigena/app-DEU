@@ -23,19 +23,22 @@ export default function ConfigurationPage() {
   }
 
   useEffect(() => {
-    const storedFontSize = localStorage.getItem("fontSize") as FontSize
-    const storedDaltonic = localStorage.getItem("daltonicMode") === "true"
-    const storedColor = localStorage.getItem("themeColor") as ThemeColor
+  const html = document.documentElement;
 
-    if (storedFontSize) setFontSize(storedFontSize)
-    if (storedColor) setThemeColor(storedColor)
-    setDaltonicMode(storedDaltonic)
+    // Aplicar font-size
+    html.style.setProperty("--font-size", fontSizeMap[fontSize]);
 
-    document.documentElement.style.setProperty(
-      "--font-size",
-      fontSizeMap[storedFontSize || "medium"]
-    )
-  }, [setFontSize, setDaltonicMode, setThemeColor])
+    // Quitar clases anteriores
+    html.classList.remove("theme-blue", "theme-green", "theme-orange", "theme-daltonic");
+
+    // Agregar la clase correcta
+    if (daltonicMode) {
+      html.classList.add("theme-daltonic");
+    } else {
+      html.classList.add(`theme-${themeColor}`);
+    }
+  }, [fontSize, themeColor, daltonicMode]);
+
 
   useEffect(() => {
     document.documentElement.style.setProperty(
