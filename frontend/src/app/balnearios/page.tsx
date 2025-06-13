@@ -2,28 +2,12 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import balnearios from "@/database/balnearios.json"
 
-const balnearios = [
-  {
-    nombre: "Balneario La Costa",
-    localidad: "Mar del Plata",
-    descripcion: "Playas amplias, actividades y más.",
-    imagen: "/images/balnearios/balneario-la-costa.jpg",
-    detalle: "Servicios completos y ubicación ideal.",
-  },
-  {
-    nombre: "Balneario El Paraíso",
-    localidad: "Villa Gesell",
-    descripcion: "Ideal para descansar y disfrutar en familia.",
-    imagen: "/images/balnearios/balneario-el-paraiso.jpg",
-    detalle: "Servicios premium y carpas.",
-  },
-  // Podés agregar más balnearios...
-]
 type Filtro = "nombre" | "localidad"
 
 export default function BalneariosPage() {
-  const [filterBy, setFilterBy] = useState<Filtro>("nombre") // ✅ Esto ahora sí es válido
+  const [filterBy, setFilterBy] = useState<Filtro>("nombre")
   const [searchTerm, setSearchTerm] = useState("")
 
   const filteredBalnearios = balnearios.filter((b) =>
@@ -33,23 +17,30 @@ export default function BalneariosPage() {
   return (
     <div className="space-y-6">
       {/* Buscador */}
-      <div className="flex flex-col sm:flex-row gap-4 items-center">
-        <input
-          type="text"
-          placeholder="Buscar balneario..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="border rounded px-4 py-2 w-full sm:max-w-sm"
-        />
-        <select
-          value={filterBy}
-          onChange={(e) => setFilterBy(e.target.value as Filtro)}
-          className="border rounded px-4 py-2"
-        >
-          <option value="nombre">Nombre</option>
-          <option value="localidad">Localidad</option>
-        </select>
-      </div>
+      <div className="pt-6 w-full max-w-4xl mx-auto flex flex-col sm:flex-row items-center gap-4 px-4">	
+		<input
+			type="text"
+			placeholder="Buscar balneario..."
+			value={searchTerm}
+			onChange={(e) => setSearchTerm(e.target.value)}
+			className="flex-grow border rounded px-4 py-2 w-full"
+		/>
+		<label htmlFor="filterBy" className="sr-only">
+			Buscar por
+			</label>
+			<select
+			id="filterBy"
+			value={filterBy}
+			onChange={(e) => setFilterBy(e.target.value as Filtro)}
+			className="w-36 border rounded px-3 py-2"
+			>
+			<option value="nombre">Nombre</option>
+			<option value="localidad">Localidad</option>
+		</select>
+
+	  </div>
+
+
 
       {/* Tarjetas */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">

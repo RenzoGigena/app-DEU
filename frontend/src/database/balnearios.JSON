@@ -1,0 +1,16 @@
+[
+  {
+    "nombre": "Balneario La Costa",
+    "localidad": "Mar del Plata",
+    "descripcion": "Playas amplias, actividades y más.",
+    "imagen": "/images/balnearios/balneario-la-costa.jpg",
+    "detalle": "Servicios completos y ubicación ideal."
+  },
+  {
+    "nombre": "Balneario El Paraíso",
+    "localidad": "Villa Gesell",
+    "descripcion": "Ideal para descansar y disfrutar en familia.",
+    "imagen": "/images/balnearios/balneario-el-paraiso.jpg",
+    "detalle": "Servicios premium y carpas."
+  }
+]
