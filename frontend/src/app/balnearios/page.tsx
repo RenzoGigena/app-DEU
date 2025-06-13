@@ -1,8 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
+import Link from "next/link"
 import balnearios from "@/database/balnearios.json"
+
 
 type Filtro = "nombre" | "localidad"
 
@@ -53,19 +54,9 @@ export default function BalneariosPage() {
               <h3 className="text-xl font-bold">{balneario.nombre}</h3>
               <p className="text-gray-600">{balneario.localidad}</p>
               <p className="mt-2">{balneario.descripcion}</p>
-              <details className="mt-3">
-                <summary className="cursor-pointer text-blue-600 underline">
-                  Ver más
-                </summary>
-                <p className="mt-2">{balneario.detalle}</p>
-                <Image
-                  src={balneario.imagen}
-                  alt={balneario.nombre}
-                  width={300}
-                  height={200}
-                  className="rounded mt-2"
-                />
-              </details>
+              <Link href={`/balnearios/${balneario.id}`} className="inline-block mt-3 text-blue-600 underline hover:text-blue-800">
+                Ver más
+              </Link>
             </div>
           ))
         ) : (
