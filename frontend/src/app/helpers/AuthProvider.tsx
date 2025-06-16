@@ -20,6 +20,7 @@ const LS_SESSION = "balneario-session"
 /* ─────────── datos por defecto ─────────── */
 const DEFAULT_USERS: StoredUser[] = [
 	{ mail: "admin@balneario.ar", password: "admin123", role: "admin" },
+	{ mail: "admin@admin.com", password: "admin123", role: "admin" },
 	{
 		mail: "colaborador@balneario.ar",
 		password: "colabora",

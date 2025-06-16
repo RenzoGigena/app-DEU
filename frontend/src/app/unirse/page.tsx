@@ -2,22 +2,19 @@
 
 import { useEffect, useState } from "react"
 
-import { AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { LoginForm } from "@/components/LoginForm"
+import { RegisterForm } from "@/components/RegisterForm"
 import { toast } from "sonner"
+import { useIsMobile } from "@/app/hooks/useIsMobile"
 
-// usamos la función directa
-
-/* ──────────── tipos ──────────── */
+/* ─── Tipos y constantes de sesión ─────────────────────────────────── */
 type Role = "admin" | "contributor"
 type User = { mail: string; password: string; role: Role }
 
-/* ──────────── constantes LS ──────────── */
 const LS_USERS = "balneario-users"
 const LS_SESSION = "balneario-session"
 
-/* usuarios base (solo se cargan la primera vez) */
 const DEFAULT_USERS: User[] = [
 	{ mail: "admin@balneario.ar", password: "admin123", role: "admin" },
 	{
@@ -27,263 +24,217 @@ const DEFAULT_USERS: User[] = [
 	},
 ]
 
-export default function UnirsePage() {
-	/* ───────── estado de sesión ───────── */
-	const [currentUser, setCurrentUser] = useState<User | null>(null)
+/* ─── helpers localStorage ─────────────────────────────────────────── */
+const getUsers = (): User[] =>
+	JSON.parse(localStorage.getItem(LS_USERS) || "[]") || DEFAULT_USERS
 
-	/* ───────── estado formularios ─────── */
-	const [register, setRegister] = useState({
+const saveUsers = (users: User[]) =>
+	localStorage.setItem(LS_USERS, JSON.stringify(users))
+
+const getSession = (): User | null =>
+	JSON.parse(localStorage.getItem(LS_SESSION) || "null")
+
+const saveSession = (u: User | null) =>
+	u
+		? localStorage.setItem(LS_SESSION, JSON.stringify(u))
+		: localStorage.removeItem(LS_SESSION)
+
+/* ──────────────────────────────────────────────────────────────────── */
+export default function UnirsePage() {
+	/* sesión */
+	const [user, setUser] = useState<User | null>(null)
+
+	/* vista: select | register | login */
+	const isMobile = useIsMobile()
+	const [view, setView] = useState<"select" | "register" | "login">("register")
+
+	/* formularios */
+	const [reg, setReg] = useState({
 		nombre: "",
 		apellido: "",
 		mail: "",
 		password: "",
 		confirm: "",
 	})
-	const [login, setLogin] = useState({ mail: "", password: "" })
-	const [registerErr, setRegisterErr] = useState<Record<string, string>>({})
-	const [loginErr, setLoginErr] = useState<Record<string, string>>({})
+	const [log, setLog] = useState({ mail: "", password: "" })
+	const [regErr, setRegErr] = useState<Record<string, string>>({})
+	const [logErr, setLogErr] = useState<Record<string, string>>({})
 
-	/* ───────── helpers LS ───────── */
-	const getUsers = (): User[] =>
-		JSON.parse(localStorage.getItem(LS_USERS) || "[]")
-
-	const saveUsers = (users: User[]) =>
-		localStorage.setItem(LS_USERS, JSON.stringify(users))
-
-	const loadSession = (): User | null =>
-		JSON.parse(localStorage.getItem(LS_SESSION) || "null")
-
-	const saveSession = (user: User | null) =>
-		user
-			? localStorage.setItem(LS_SESSION, JSON.stringify(user))
-			: localStorage.removeItem(LS_SESSION)
-
-	/* ───────── efecto inicial ───────── */
+	/* hidratar */
 	useEffect(() => {
-		/* 1) inyectar usuarios por defecto si hace falta */
 		if (!localStorage.getItem(LS_USERS)) saveUsers(DEFAULT_USERS)
-
-		/* 2) hidratar sesión */
-		const ses = loadSession()
-		if (ses) setCurrentUser(ses)
+		const ses = getSession()
+		if (ses) setUser(ses)
 	}, [])
 
-	/* ───────── validaciones ───────── */
-	const validateRegister = () => {
-		const err: Record<string, string> = {}
-		if (!register.nombre) err.nombre = "Campo obligatorio"
-		if (!register.apellido) err.apellido = "Campo obligatorio"
-		if (!register.mail.includes("@")) err.mail = "Mail inválido"
-		if (register.password.length < 6) err.password = "Mínimo 6 caracteres"
-		if (register.password !== register.confirm)
-			err.confirm = "Las contraseñas no coinciden"
-		setRegisterErr(err)
-		return Object.keys(err).length === 0
-	}
+	/* ajustar vista en mobile */
+	useEffect(() => {
+		if (!user && isMobile) setView("select")
+	}, [isMobile, user])
 
-	const validateLogin = () => {
-		const err: Record<string, string> = {}
-		if (!login.mail) err.mail = "Campo obligatorio"
-		if (!login.password) err.password = "Campo obligatorio"
-		setLoginErr(err)
-		return Object.keys(err).length === 0
-	}
-
-	/* ───────── acciones ───────── */
+	/* ─── handlers ───────────────────────────────────────────────────── */
 	const handleRegister = () => {
-		if (!validateRegister()) return
+		const err: Record<string, string> = {}
+		if (!reg.nombre) err.nombre = "Requerido"
+		if (!reg.apellido) err.apellido = "Requerido"
+		if (!reg.mail.includes("@")) err.mail = "Mail inválido"
+		if (reg.password.length < 6) err.password = "≥ 6 caracteres"
+		if (reg.password !== reg.confirm) err.confirm = "No coinciden"
+		setRegErr(err)
+		if (Object.keys(err).length) return
 
-		/* comprobar mail duplicado */
 		const users = getUsers()
-		if (users.some((u) => u.mail === register.mail)) {
-			setRegisterErr({ mail: "Ese mail ya está registrado" })
+		if (users.some((u) => u.mail === reg.mail)) {
+			setRegErr({ mail: "Ya registrado" })
 			return
 		}
 
-		const newUser: User = {
-			mail: register.mail,
-			password: register.password,
+		const nuevo: User = {
+			mail: reg.mail,
+			password: reg.password,
 			role: "contributor",
 		}
-		saveUsers([...users, newUser])
-
-		toast("Registro exitoso 🎉", {
-			description: "Ya podés iniciar sesión",
-		})
-		setRegister({
-			nombre: "",
-			apellido: "",
-			mail: "",
-			password: "",
-			confirm: "",
-		})
+		saveUsers([...users, nuevo])
+		toast("Registro exitoso 🎉", { description: "Ya podés iniciar sesión" })
+		setReg({ nombre: "", apellido: "", mail: "", password: "", confirm: "" })
+		setView("login")
 	}
 
 	const handleLogin = () => {
-		if (!validateLogin()) return
+		const err: Record<string, string> = {}
+		if (!log.mail) err.mail = "Requerido"
+		if (!log.password) err.password = "Requerido"
+		setLogErr(err)
+		if (Object.keys(err).length) return
 
-		const user = getUsers().find(
-			(u) => u.mail === login.mail && u.password === login.password
+		const usuario = getUsers().find(
+			(u) => u.mail === log.mail && u.password === log.password
 		)
-		if (!user) {
-			setLoginErr({ global: "El mail y la contraseña no coinciden" })
-		} else {
-			setCurrentUser(user)
-			saveSession(user)
-			toast("Bienvenido", { description: "Iniciaste sesión correctamente" })
-			setLogin({ mail: "", password: "" })
-			setLoginErr({})
+		if (!usuario) {
+			setLogErr({ global: "Mail o contraseña incorrectos" })
+			return
 		}
+
+		setUser(usuario)
+		saveSession(usuario)
+		toast("Bienvenido 👋", { description: "Sesión iniciada" })
+		setLog({ mail: "", password: "" })
 	}
 
 	const handleLogout = () => {
-		setCurrentUser(null)
+		setUser(null)
 		saveSession(null)
-		toast("Sesión cerrada", { description: "Hasta la próxima" })
+		toast("Sesión cerrada")
+		setView("select")
 	}
 
-	/* ───────── vista si YA está logueado ───────── */
-	if (currentUser) {
+	/* cambio de inputs */
+	const handleRegChange = (field: string, value: string) =>
+		setReg((prev) => ({ ...prev, [field]: value }))
+	const handleLogChange = (field: string, value: string) =>
+		setLog((prev) => ({ ...prev, [field]: value }))
+
+	/* ─── render logged in ───────────────────────────────────────────── */
+	if (user) {
 		return (
-			<main className="flex flex-col items-center justify-center h-[70vh] gap-6 text-center">
-				<div>
-					<h2 className="text-2xl font-bold text-primary mb-2">
-						¡Ya estás logueado!
-					</h2>
-					<p className="text-muted-foreground max-w-md">
-						Gracias por colaborar con nosotros, tu aporte marca la diferencia
-					</p>
-					<p className="mt-4 text-sm">
-						Rol asignado:{" "}
-						<span className="font-semibold">{currentUser.role}</span>
-					</p>
-				</div>
-				<Button onClick={handleLogout}>Cerrar sesión</Button>
+			<main
+				role="main"
+				className="flex flex-col items-center justify-center h-[75vh] gap-6 text-center px-4"
+			>
+				<h2 className="text-2xl font-bold text-primary">¡Ya estás logueado!</h2>
+				<p className="text-muted-foreground max-w-sm">
+					Gracias por colaborar con nosotros, tu aporte marca la diferencia.
+				</p>
+				<p className="text-sm">
+					Rol: <span className="font-semibold">{user.role}</span>
+				</p>
+				<Button onClick={handleLogout} aria-label="Cerrar sesión">
+					Cerrar sesión
+				</Button>
 			</main>
 		)
 	}
 
-	/* ───────── vista de registro / login ───────── */
+	/* ─── página principal ───────────────────────────────────────────── */
 	return (
-		<main className="flex-1 mx-auto w-full max-w-5xl px-3 py-12 space-y-10">
-			{/* encabezado */}
+		<main
+			role="main"
+			className="flex-1 mx-auto w-full max-w-5xl px-3 py-10 space-y-10"
+		>
 			<section className="text-center space-y-2">
 				<h2 className="text-3xl font-bold text-primary">¿Querés contribuir?</h2>
-				<p className="text-muted-foreground">
-					Esta página está dedicada para las personas que quieran contribuir con
-					el proyecto de balnearios
+				<p className="text-muted-foreground max-w-md mx-auto">
+					Esta página está dedicada a personas que quieran aportar al proyecto
+					de balnearios del Río de la Plata.
 				</p>
 			</section>
 
-			{/* formularios */}
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-				{/* ---------- registro ---------- */}
-				<section className="space-y-4 border rounded-lg p-6 shadow">
-					<h3 className="text-xl font-semibold text-primary">Registrate</h3>
-
-					<Input
-						placeholder="Nombre"
-						value={register.nombre}
-						onChange={(e) =>
-							setRegister({ ...register, nombre: e.target.value })
-						}
-						className={registerErr.nombre ? "border-red-500" : ""}
-					/>
-					{registerErr.nombre && (
-						<p className="text-xs text-red-600">{registerErr.nombre}</p>
-					)}
-
-					<Input
-						placeholder="Apellido"
-						value={register.apellido}
-						onChange={(e) =>
-							setRegister({ ...register, apellido: e.target.value })
-						}
-						className={registerErr.apellido ? "border-red-500" : ""}
-					/>
-					{registerErr.apellido && (
-						<p className="text-xs text-red-600">{registerErr.apellido}</p>
-					)}
-
-					<Input
-						placeholder="Mail"
-						type="email"
-						value={register.mail}
-						onChange={(e) => setRegister({ ...register, mail: e.target.value })}
-						className={registerErr.mail ? "border-red-500" : ""}
-					/>
-					{registerErr.mail && (
-						<p className="text-xs text-red-600">{registerErr.mail}</p>
-					)}
-
-					<Input
-						placeholder="Contraseña"
-						type="password"
-						value={register.password}
-						onChange={(e) =>
-							setRegister({ ...register, password: e.target.value })
-						}
-						className={registerErr.password ? "border-red-500" : ""}
-					/>
-					{registerErr.password && (
-						<p className="text-xs text-red-600">{registerErr.password}</p>
-					)}
-
-					<Input
-						placeholder="Confirmar contraseña"
-						type="password"
-						value={register.confirm}
-						onChange={(e) =>
-							setRegister({ ...register, confirm: e.target.value })
-						}
-						className={registerErr.confirm ? "border-red-500" : ""}
-					/>
-					{registerErr.confirm && (
-						<p className="text-xs text-red-600">{registerErr.confirm}</p>
-					)}
-
-					<Button className="w-full mt-2" onClick={handleRegister}>
-						Registrarme
+			{/* Selector en mobile */}
+			{view === "select" && (
+				<div
+					className="flex flex-col gap-8 md:hidden"
+					aria-label="Selector de acción"
+				>
+					<Button
+						className="h-20 text-lg"
+						aria-label="Registrarse"
+						onClick={() => setView("register")}
+					>
+						Registrarse →
 					</Button>
-				</section>
-
-				{/* ---------- login ---------- */}
-				<section className="space-y-4 border rounded-lg p-6 shadow">
-					<h3 className="text-xl font-semibold text-primary">Inicia sesión</h3>
-
-					{loginErr.global && (
-						<div className="text-red-600 flex items-center gap-2 text-sm">
-							<AlertCircle className="w-4 h-4" />
-							{loginErr.global}
-						</div>
-					)}
-
-					<Input
-						placeholder="Mail"
-						type="email"
-						value={login.mail}
-						onChange={(e) => setLogin({ ...login, mail: e.target.value })}
-						className={loginErr.mail ? "border-red-500" : ""}
-					/>
-					{loginErr.mail && (
-						<p className="text-xs text-red-600">{loginErr.mail}</p>
-					)}
-
-					<Input
-						placeholder="Contraseña"
-						type="password"
-						value={login.password}
-						onChange={(e) => setLogin({ ...login, password: e.target.value })}
-						className={loginErr.password ? "border-red-500" : ""}
-					/>
-					{loginErr.password && (
-						<p className="text-xs text-red-600">{loginErr.password}</p>
-					)}
-
-					<Button className="w-full mt-2" onClick={handleLogin}>
-						Iniciar sesión
+					<Button
+						className="h-20 text-lg"
+						variant="outline"
+						aria-label="Iniciar sesión"
+						onClick={() => setView("login")}
+					>
+						Iniciar sesión →
 					</Button>
-				</section>
+				</div>
+			)}
+
+			{/* Escritorio: siempre ambos */}
+			<div className="hidden md:grid md:grid-cols-2 md:gap-8">
+				<RegisterForm
+					showBack={false}
+					errors={regErr}
+					values={reg}
+					onChange={handleRegChange}
+					onSubmit={handleRegister}
+					onBack={() => setView("select")}
+				/>
+				<LoginForm
+					showBack={false}
+					errors={logErr}
+					values={log}
+					onChange={handleLogChange}
+					onSubmit={handleLogin}
+					onBack={() => setView("select")}
+				/>
+			</div>
+
+			{/* Mobile: formulario activo */}
+			<div className="md:hidden">
+				{view === "register" && (
+					<RegisterForm
+						showBack
+						errors={regErr}
+						values={reg}
+						onChange={handleRegChange}
+						onSubmit={handleRegister}
+						onBack={() => setView("select")}
+					/>
+				)}
+				{view === "login" && (
+					<LoginForm
+						showBack
+						errors={logErr}
+						values={log}
+						onChange={handleLogChange}
+						onSubmit={handleLogin}
+						onBack={() => setView("select")}
+					/>
+				)}
 			</div>
 		</main>
 	)

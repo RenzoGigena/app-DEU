@@ -1,30 +1,86 @@
 [
-  {
-    "id": "1",
-    "nombre": "Balneario La Costa",
-    "localidad": "Mar del Plata",
-    "descripcion": "Playas amplias, actividades y más.",
-    "imagen": "/images/balnearios/balneario-la-costa.jpg",
-    "imagenAlt": "Balneario La Costa en Mar del Plata",
-    "detalle": "Servicios completos y ubicación ideal.",
-    "servicios": [
-      { "nombreServicio": "WiFi", "tiene": true },
-      { "nombreServicio": "Estacionamiento", "tiene": true },
-      { "nombreServicio": "Pileta", "tiene": false }
-    ]
-  },
-  {
-    "id": "2",
-    "nombre": "Balneario El Paraíso",
-    "localidad": "Villa Gesell",
-    "descripcion": "Ideal para descansar y disfrutar en familia.",
-    "imagen": "/images/balnearios/balneario-el-paraiso.jpg",
-    "imagenAlt": "Balneario El Paraiso en Villa Gesell",
-    "detalle": "Servicios premium y carpas.",
-    "servicios": [
-      { "nombreServicio": "WiFi", "tiene": false },
-      { "nombreServicio": "Estacionamiento", "tiene": true },
-      { "nombreServicio": "Pileta", "tiene": true }
-    ]
-  }
+	{
+		"id": "1",
+		"nombre": "Balneario La Costa",
+		"localidad": "Mar del Plata",
+		"descripcion": "Playas amplias, actividades y más.",
+		"imagen": "/images/balnearios/balneario-la-costa.jpg",
+		"imagenAlt": "Balneario La Costa en Mar del Plata",
+		"detalle": "Servicios completos y ubicación ideal.",
+		"servicios": [
+			{ "nombreServicio": "WiFi", "tiene": true },
+			{ "nombreServicio": "Estacionamiento", "tiene": true },
+			{ "nombreServicio": "Pileta", "tiene": false }
+		]
+	},
+	{
+		"id": "2",
+		"nombre": "Balneario El Paraíso",
+		"localidad": "Villa Gesell",
+		"descripcion": "Ideal para descansar y disfrutar en familia.",
+		"imagen": "/images/balnearios/balneario-el-paraiso.jpg",
+		"imagenAlt": "Balneario El Paraiso en Villa Gesell",
+		"detalle": "Servicios premium y carpas.",
+		"servicios": [
+			{ "nombreServicio": "WiFi", "tiene": false },
+			{ "nombreServicio": "Estacionamiento", "tiene": true },
+			{ "nombreServicio": "Pileta", "tiene": true }
+		]
+	},
+	{
+		"id": "3",
+		"nombre": "Balneario Hudson",
+		"localidad": "Berazategui",
+		"descripcion": "Naturaleza y tranquilidad cerca de la ciudad.",
+		"imagen": "/images/balnearios/balneario-hudson.jpg",
+		"imagenAlt": "Balneario Hudson en Berazategui",
+		"detalle": "Ideal para picnic y actividades al aire libre.",
+		"servicios": [
+			{ "nombreServicio": "WiFi", "tiene": false },
+			{ "nombreServicio": "Estacionamiento", "tiene": true },
+			{ "nombreServicio": "Pileta", "tiene": false }
+		]
+	},
+	{
+		"id": "4",
+		"nombre": "Balneario Municipal Quilmes",
+		"localidad": "Quilmes",
+		"descripcion": "Un clásico de la ribera sur del Río de la Plata.",
+		"imagen": "/images/balnearios/balneario-quilmes.jpg",
+		"imagenAlt": "Balneario Quilmes",
+		"detalle": "Espacios públicos renovados con vista al río.",
+		"servicios": [
+			{ "nombreServicio": "WiFi", "tiene": true },
+			{ "nombreServicio": "Estacionamiento", "tiene": true },
+			{ "nombreServicio": "Pileta", "tiene": false }
+		]
+	},
+	{
+		"id": "5",
+		"nombre": "Balneario Punta Lara",
+		"localidad": "Ensenada",
+		"descripcion": "Aguas tranquilas y áreas verdes extensas.",
+		"imagen": "/images/balnearios/balneario-punta-lara.jpg",
+		"imagenAlt": "Balneario Punta Lara en Ensenada",
+		"detalle": "Balneario familiar con espacios para deporte.",
+		"servicios": [
+			{ "nombreServicio": "WiFi", "tiene": false },
+			{ "nombreServicio": "Estacionamiento", "tiene": true },
+			{ "nombreServicio": "Pileta", "tiene": true }
+		]
+	},
+	{
+		"id": "6",
+		"nombre": "Ribera de Avellaneda",
+		"localidad": "Avellaneda",
+		"descripcion": "Caminatas frente al río y parque costero.",
+		"imagen": "/images/balnearios/ribera-avellaneda.jpg",
+		"imagenAlt": "Ribera de Avellaneda",
+		"detalle": "Moderno paseo con espacios recreativos.",
+		"servicios": [
+			{ "nombreServicio": "WiFi", "tiene": true },
+			{ "nombreServicio": "Estacionamiento", "tiene": false },
+			{ "nombreServicio": "Pileta", "tiene": false }
+		]
+	}
 ]
