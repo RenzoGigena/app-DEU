@@ -12,8 +12,11 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Menu } from "lucide-react"
 import React from "react"
+import { useAuth } from "@/helpers/AuthProvider"
 
 export default function StickyNavbar() {
+	const { user } = useAuth()
+
 	return (
 		<header className="sticky top-0 z-50 w-full border-b bg-[var(--primary)] text-[var(--primary-foreground)] backdrop-blur-md py-1 shadow-sm">
 			<div className="container mx-auto flex items-center justify-between px-4">
@@ -25,6 +28,19 @@ export default function StickyNavbar() {
 				{/* Navegación en desktop */}
 				<NavigationMenu className="hidden lg:flex">
 					<NavigationMenuList className="gap-6">
+						{user?.role === "admin" && (
+							<NavigationMenuItem>
+								<NavigationMenuLink asChild>
+									<Link
+										href="/solicitudes"
+										className="text-base font-medium transition-all duration-200 border-b-2 border-2 border-transparent hover:border-[var(--accent)] hover:text-[var(--accent)]"
+									>
+										Solicitudes
+									</Link>
+								</NavigationMenuLink>
+							</NavigationMenuItem>
+						)}
+
 						{[
 							{ href: "/", label: "Bienvenida" },
 							{ href: "/balnearios", label: "Balnearios" },
@@ -48,7 +64,11 @@ export default function StickyNavbar() {
 				{/* Menú mobile */}
 				<Sheet>
 					<SheetTrigger asChild>
-						<Button variant="ghost" size="icon" className="lg:hidden text-[var(--accent)] hover:text-[var(--accent)]">
+						<Button
+							variant="ghost"
+							size="icon"
+							className="lg:hidden text-[var(--accent)] hover:text-[var(--accent)]"
+						>
 							<Menu className="h-6 w-6" />
 						</Button>
 					</SheetTrigger>

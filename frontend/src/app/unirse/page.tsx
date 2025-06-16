@@ -6,43 +6,12 @@ import { Button } from "@/components/ui/button"
 import { LoginForm } from "@/components/LoginForm"
 import { RegisterForm } from "@/components/RegisterForm"
 import { toast } from "sonner"
-import { useIsMobile } from "@/app/hooks/useIsMobile"
+import { useAuth } from "@/helpers/AuthProvider"
+import { useIsMobile } from "@/hooks/useIsMobile"
 
-/* ─── Tipos y constantes de sesión ─────────────────────────────────── */
-type Role = "admin" | "contributor"
-type User = { mail: string; password: string; role: Role }
-
-const LS_USERS = "balneario-users"
-const LS_SESSION = "balneario-session"
-
-const DEFAULT_USERS: User[] = [
-	{ mail: "admin@balneario.ar", password: "admin123", role: "admin" },
-	{
-		mail: "colaborador@balneario.ar",
-		password: "colabora",
-		role: "contributor",
-	},
-]
-
-/* ─── helpers localStorage ─────────────────────────────────────────── */
-const getUsers = (): User[] =>
-	JSON.parse(localStorage.getItem(LS_USERS) || "[]") || DEFAULT_USERS
-
-const saveUsers = (users: User[]) =>
-	localStorage.setItem(LS_USERS, JSON.stringify(users))
-
-const getSession = (): User | null =>
-	JSON.parse(localStorage.getItem(LS_SESSION) || "null")
-
-const saveSession = (u: User | null) =>
-	u
-		? localStorage.setItem(LS_SESSION, JSON.stringify(u))
-		: localStorage.removeItem(LS_SESSION)
-
-/* ──────────────────────────────────────────────────────────────────── */
 export default function UnirsePage() {
-	/* sesión */
-	const [user, setUser] = useState<User | null>(null)
+	/* ─── AuthContext ──────────────────────────────────────────────── */
+	const { user, login, logout, register } = useAuth()
 
 	/* vista: select | register | login */
 	const isMobile = useIsMobile()
@@ -60,20 +29,14 @@ export default function UnirsePage() {
 	const [regErr, setRegErr] = useState<Record<string, string>>({})
 	const [logErr, setLogErr] = useState<Record<string, string>>({})
 
-	/* hidratar */
-	useEffect(() => {
-		if (!localStorage.getItem(LS_USERS)) saveUsers(DEFAULT_USERS)
-		const ses = getSession()
-		if (ses) setUser(ses)
-	}, [])
-
-	/* ajustar vista en mobile */
+	/* ajustar vista inicial en mobile */
 	useEffect(() => {
 		if (!user && isMobile) setView("select")
 	}, [isMobile, user])
 
-	/* ─── handlers ───────────────────────────────────────────────────── */
+	/* ─── handlers ─────────────────────────────────────────────────── */
 	const handleRegister = () => {
+		/* validaciones */
 		const err: Record<string, string> = {}
 		if (!reg.nombre) err.nombre = "Requerido"
 		if (!reg.apellido) err.apellido = "Requerido"
@@ -83,18 +46,13 @@ export default function UnirsePage() {
 		setRegErr(err)
 		if (Object.keys(err).length) return
 
-		const users = getUsers()
-		if (users.some((u) => u.mail === reg.mail)) {
+		/* registrar vía provider */
+		const ok = register({ mail: reg.mail, password: reg.password })
+		if (!ok) {
 			setRegErr({ mail: "Ya registrado" })
 			return
 		}
 
-		const nuevo: User = {
-			mail: reg.mail,
-			password: reg.password,
-			role: "contributor",
-		}
-		saveUsers([...users, nuevo])
 		toast("Registro exitoso 🎉", { description: "Ya podés iniciar sesión" })
 		setReg({ nombre: "", apellido: "", mail: "", password: "", confirm: "" })
 		setView("login")
@@ -107,34 +65,29 @@ export default function UnirsePage() {
 		setLogErr(err)
 		if (Object.keys(err).length) return
 
-		const usuario = getUsers().find(
-			(u) => u.mail === log.mail && u.password === log.password
-		)
-		if (!usuario) {
+		const ok = login(log.mail, log.password)
+		if (!ok) {
 			setLogErr({ global: "Mail o contraseña incorrectos" })
 			return
 		}
 
-		setUser(usuario)
-		saveSession(usuario)
 		toast("Bienvenido 👋", { description: "Sesión iniciada" })
 		setLog({ mail: "", password: "" })
 	}
 
 	const handleLogout = () => {
-		setUser(null)
-		saveSession(null)
+		logout() // ← actualiza contexto y localStorage
 		toast("Sesión cerrada")
 		setView("select")
 	}
 
-	/* cambio de inputs */
-	const handleRegChange = (field: string, value: string) =>
-		setReg((prev) => ({ ...prev, [field]: value }))
-	const handleLogChange = (field: string, value: string) =>
-		setLog((prev) => ({ ...prev, [field]: value }))
+	/* cambios de campos */
+	const handleRegChange = (f: string, v: string) =>
+		setReg((p) => ({ ...p, [f]: v }))
+	const handleLogChange = (f: string, v: string) =>
+		setLog((p) => ({ ...p, [f]: v }))
 
-	/* ─── render logged in ───────────────────────────────────────────── */
+	/* ─── render sesión iniciada ───────────────────────────────────── */
 	if (user) {
 		return (
 			<main
@@ -155,7 +108,7 @@ export default function UnirsePage() {
 		)
 	}
 
-	/* ─── página principal ───────────────────────────────────────────── */
+	/* ─── página principal ─────────────────────────────────────────── */
 	return (
 		<main
 			role="main"
@@ -169,7 +122,7 @@ export default function UnirsePage() {
 				</p>
 			</section>
 
-			{/* Selector en mobile */}
+			{/* Selección en mobile */}
 			{view === "select" && (
 				<div
 					className="flex flex-col gap-8 md:hidden"
@@ -193,7 +146,7 @@ export default function UnirsePage() {
 				</div>
 			)}
 
-			{/* Escritorio: siempre ambos */}
+			{/* Escritorio: ambos formularios */}
 			<div className="hidden md:grid md:grid-cols-2 md:gap-8">
 				<RegisterForm
 					showBack={false}

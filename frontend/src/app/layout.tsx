@@ -1,7 +1,7 @@
 import "@/app/globals.css"
 
-import { AuthProvider } from "./helpers/AuthProvider"
-import ClientProvider from "@/app/helpers/ClientProvider"
+import { AuthProvider } from "../helpers/AuthProvider"
+import ClientProvider from "@/helpers/ClientProvider"
 import type { ReactNode } from "react"
 import StickyNavbar from "@/components/stickynavbar"
 import { Toaster } from "@/components/ui/sonner"
@@ -15,11 +15,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="es" suppressHydrationWarning>
 			<body className="bg-background text-foreground">
-				<StickyNavbar />
-				<ClientProvider>
-					<AuthProvider>{children}</AuthProvider>
-					<Toaster richColors position="top-center" />
-				</ClientProvider>
+				<AuthProvider>
+					<ClientProvider>
+						<StickyNavbar />
+						{children}
+						<Toaster richColors position="top-center" />
+					</ClientProvider>
+				</AuthProvider>
 			</body>
 		</html>
 	)
