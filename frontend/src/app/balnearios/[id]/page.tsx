@@ -5,7 +5,7 @@ import { notFound } from "next/navigation"
 export default async function BalnearioDetail({ params }: any) {
 	const { id } = params
 
-	const data = await import("@/database/balnearios.JSON")
+	const data = await import("@/mocks/balnearios.json")
 	const balnearios: Balneario[] = data.default
 
 	const balneario = balnearios.find((b) => b.id === id)
