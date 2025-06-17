@@ -165,3 +165,8 @@ html {
   --background: #fdfdfd;
   --text: #000;
 }
+
+/* globals.css o styles.css */
+.daltonic-filter {
+  filter: url("#daltonic-filter");
+}

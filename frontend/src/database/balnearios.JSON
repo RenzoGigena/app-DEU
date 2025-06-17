@@ -10,7 +10,8 @@
 		"servicios": [
 			{ "nombreServicio": "WiFi", "tiene": true },
 			{ "nombreServicio": "Estacionamiento", "tiene": true },
-			{ "nombreServicio": "Pileta", "tiene": false }
+			{ "nombreServicio": "Pileta", "tiene": false },
+			{ "nombreServicio": "Buffet", "tiene": false }
 		]
 	},
 	{
@@ -24,7 +25,8 @@
 		"servicios": [
 			{ "nombreServicio": "WiFi", "tiene": false },
 			{ "nombreServicio": "Estacionamiento", "tiene": true },
-			{ "nombreServicio": "Pileta", "tiene": true }
+			{ "nombreServicio": "Pileta", "tiene": true },
+			{ "nombreServicio": "Buffet", "tiene": false }
 		]
 	},
 	{
@@ -38,7 +40,8 @@
 		"servicios": [
 			{ "nombreServicio": "WiFi", "tiene": false },
 			{ "nombreServicio": "Estacionamiento", "tiene": true },
-			{ "nombreServicio": "Pileta", "tiene": false }
+			{ "nombreServicio": "Pileta", "tiene": false },
+			{ "nombreServicio": "Buffet", "tiene": false }
 		]
 	},
 	{
@@ -52,7 +55,8 @@
 		"servicios": [
 			{ "nombreServicio": "WiFi", "tiene": true },
 			{ "nombreServicio": "Estacionamiento", "tiene": true },
-			{ "nombreServicio": "Pileta", "tiene": false }
+			{ "nombreServicio": "Pileta", "tiene": false },
+			{ "nombreServicio": "Buffet", "tiene": false }
 		]
 	},
 	{
@@ -66,7 +70,8 @@
 		"servicios": [
 			{ "nombreServicio": "WiFi", "tiene": false },
 			{ "nombreServicio": "Estacionamiento", "tiene": true },
-			{ "nombreServicio": "Pileta", "tiene": true }
+			{ "nombreServicio": "Pileta", "tiene": true },
+			{ "nombreServicio": "Buffet", "tiene": false }
 		]
 	},
 	{
@@ -80,7 +85,8 @@
 		"servicios": [
 			{ "nombreServicio": "WiFi", "tiene": true },
 			{ "nombreServicio": "Estacionamiento", "tiene": false },
-			{ "nombreServicio": "Pileta", "tiene": false }
+			{ "nombreServicio": "Pileta", "tiene": false },
+			{ "nombreServicio": "Buffet", "tiene": false }
 		]
 	},
 	{
@@ -94,7 +100,8 @@
 		"servicios": [
 			{ "nombreServicio": "WiFi", "tiene": true },
 			{ "nombreServicio": "Estacionamiento", "tiene": false },
-			{ "nombreServicio": "Pileta", "tiene": false }
+			{ "nombreServicio": "Pileta", "tiene": false },
+			{ "nombreServicio": "Buffet", "tiene": false }
 		]
 	}
 ]

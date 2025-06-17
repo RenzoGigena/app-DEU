@@ -23,80 +23,96 @@ export default function ConfigurationPage() {
   }
 
   useEffect(() => {
-  const html = document.documentElement;
+    const html = document.documentElement
 
     // Aplicar font-size
-    html.style.setProperty("--font-size", fontSizeMap[fontSize]);
+    html.style.setProperty("--font-size", fontSizeMap[fontSize])
 
     // Quitar clases anteriores
-    html.classList.remove("theme-blue", "theme-green", "theme-orange", "theme-daltonic");
+    html.classList.remove("theme-blue", "theme-green", "theme-orange", "theme-daltonic")
 
     // Agregar la clase correcta
     if (daltonicMode) {
-      html.classList.add("theme-daltonic");
+      html.classList.add("theme-daltonic")
     } else {
-      html.classList.add(`theme-${themeColor}`);
+      html.classList.add(`theme-${themeColor}`)
     }
-  }, [fontSize, themeColor, daltonicMode]);
-
-
-  useEffect(() => {
-    document.documentElement.style.setProperty(
-      "--font-size",
-      fontSizeMap[fontSize]
-    )
-  }, [fontSize])
+  }, [fontSize, themeColor, daltonicMode])
 
   return (
-  <main className="max-w-3xl mx-auto p-6">
-
-    <div className="space-y-6">
+    <main
+      className="max-w-3xl mx-auto p-6"
+      role="main"
+      aria-labelledby="configuracion-heading"
+    >
       <header className="text-center space-y-2">
-				<h1 className="text-3xl font-bold text-primary">Configuracion de accesibilidad</h1>
-				<p className="text-muted-foreground max-w-md mx-auto">
-					Aqui puedes cambiar la configuración de accesibilidad del sitio, como el tamaño de fuente, el modo daltónico y el color del tema. 
+        <h1 id="configuracion-heading" className="text-3xl font-bold text-primary">
+          Configuración de accesibilidad
+        </h1>
+        <p className="text-muted-foreground max-w-md mx-auto" id="configuracion-description">
+          Aquí puedes cambiar la configuración de accesibilidad del sitio, como el tamaño de fuente, el modo daltónico y el color del tema.
           Estas opciones te ayudarán a personalizar tu experiencia de navegación.
-				</p>
-			</header>
+        </p>
+      </header>
 
-      <div>
-        <label className="block font-semibold">Tamaño de fuente</label>
-        <select
-          value={fontSize}
-          onChange={(e) => setFontSize(e.target.value as FontSize)}
-          className="border px-3 py-2 rounded"
-        >
-          <option value="small">Chico</option>
-          <option value="medium">Mediano</option>
-          <option value="large">Grande</option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block font-semibold">Modo daltónico</label>
-        <input
-          type="checkbox"
-          checked={daltonicMode}
-          onChange={(e) => setDaltonicMode(e.target.checked)}
-          className="ml-2"
-        />
-      </div>
-
-      {!daltonicMode && (
+      <form
+        className="space-y-6 mt-6"
+        aria-describedby="configuracion-description"
+      >
+        {/* Tamaño de fuente */}
         <div>
-          <label className="block font-semibold">Color del sitio</label>
+          <label htmlFor="font-size-select" className="block font-semibold">
+            Tamaño de fuente
+          </label>
           <select
-            value={themeColor}
-            onChange={(e) => setThemeColor(e.target.value as ThemeColor)}
+            id="font-size-select"
+            value={fontSize}
+            onChange={(e) => setFontSize(e.target.value as FontSize)}
             className="border px-3 py-2 rounded"
           >
-            <option value="blue">Azul</option>
-            <option value="green">Verde</option>
-            <option value="orange">Naranja</option>
+            <option value="small">Chico</option>
+            <option value="medium">Mediano</option>
+            <option value="large">Grande</option>
           </select>
         </div>
-      )}
-    </div>
-  </main>
+
+        {/* Modo daltónico */}
+        <div>
+          <label htmlFor="daltonic-checkbox" className="block font-semibold">
+            Modo daltónico
+          </label>
+          <input
+            id="daltonic-checkbox"
+            type="checkbox"
+            checked={daltonicMode}
+            onChange={(e) => setDaltonicMode(e.target.checked)}
+            className="ml-2"
+            aria-describedby="daltonic-description"
+          />
+          <p id="daltonic-description" className="text-sm text-gray-600 mt-1">
+            Cambia los colores del sitio para facilitar la visualización a personas con daltonismo.
+          </p>
+        </div>
+
+        {/* Selector de tema (solo si no está activo el modo daltónico) */}
+        {!daltonicMode && (
+          <div>
+            <label htmlFor="theme-select" className="block font-semibold">
+              Color del sitio
+            </label>
+            <select
+              id="theme-select"
+              value={themeColor}
+              onChange={(e) => setThemeColor(e.target.value as ThemeColor)}
+              className="border px-3 py-2 rounded"
+            >
+              <option value="blue">Azul</option>
+              <option value="green">Verde</option>
+              <option value="orange">Naranja</option>
+            </select>
+          </div>
+        )}
+      </form>
+    </main>
   )
 }
