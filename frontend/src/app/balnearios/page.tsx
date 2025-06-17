@@ -2,7 +2,7 @@
 
 import { Balneario } from "@/types/balnearios"
 import Link from "next/link"
-import balnearios from "@/database/balnearios.JSON"
+import balnearios from "@/mocks/balnearios.json"
 import { useState } from "react"
 
 type Filtro = "nombre" | "localidad"
@@ -22,17 +22,15 @@ export default function BalneariosPage() {
 			aria-labelledby="balnearios-heading"
 		>
 			<header className="text-center space-y-2">
-				<h1
-					id="balnearios-heading"
-					className="text-3xl font-bold text-primary"
-				>
+				<h1 id="balnearios-heading" className="text-3xl font-bold text-primary">
 					Balnearios
 				</h1>
 				<p
 					className="text-muted-foreground max-w-md mx-auto"
 					id="intro-description"
 				>
-					Aquí encontrarás una lista de balnearios disponibles en la rivera sur del Río de La Plata. Puedes buscar por nombre o localidad.
+					Aquí encontrarás una lista de balnearios disponibles en la rivera sur
+					del Río de La Plata. Puedes buscar por nombre o localidad.
 				</p>
 			</header>
 

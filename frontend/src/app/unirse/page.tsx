@@ -7,7 +7,7 @@ import { LoginForm } from "@/components/LoginForm"
 import { RegisterForm } from "@/components/RegisterForm"
 import { toast } from "sonner"
 import { useAuth } from "@/helpers/AuthProvider"
-import { useIsMobile } from "@/hooks/useIsMobile"
+import { useIsMobile } from "@/hooks/use-IsMobile"
 
 export default function UnirsePage() {
 	const { user, login, logout, register } = useAuth()

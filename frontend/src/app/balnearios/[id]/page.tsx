@@ -1,7 +1,6 @@
 import { Balneario } from "@/types/balnearios"
-import Image from "next/image"
-import { notFound } from "next/navigation"
 import DaltonicImage from "@/components/DaltonicImage"
+import { notFound } from "next/navigation"
 
 export default async function BalnearioDetail({ params }: any) {
 	const { id } = params
@@ -20,10 +19,7 @@ export default async function BalnearioDetail({ params }: any) {
 			aria-labelledby="balneario-title"
 		>
 			<div className="max-w-3xl mx-auto px-4 py-6 space-y-6">
-				<h1
-					id="balneario-title"
-					className="text-3xl font-bold"
-				>
+				<h1 id="balneario-title" className="text-3xl font-bold">
 					{balneario.nombre}
 				</h1>
 
@@ -37,14 +33,10 @@ export default async function BalnearioDetail({ params }: any) {
 					className="rounded-md"
 				/>
 
-
 				<p>{balneario.detalle}</p>
 
 				<section aria-labelledby="servicios-title">
-					<h2
-						id="servicios-title"
-						className="text-2xl font-semibold mt-6"
-					>
+					<h2 id="servicios-title" className="text-2xl font-semibold mt-6">
 						Servicios
 					</h2>
 
@@ -67,9 +59,7 @@ export default async function BalnearioDetail({ params }: any) {
 										aria-checked={servicio.tiene}
 										aria-disabled="true"
 									/>
-									<label htmlFor={servicioId}>
-										{servicio.nombreServicio}
-									</label>
+									<label htmlFor={servicioId}>{servicio.nombreServicio}</label>
 								</li>
 							)
 						})}

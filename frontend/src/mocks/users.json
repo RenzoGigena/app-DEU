@@ -1,0 +1,9 @@
+[
+	{ "mail": "admin@balneario.ar", "password": "admin123", "role": "admin" },
+	{ "mail": "admin@gmail.com.ar", "password": "admin123", "role": "admin" },
+	{
+		"mail": "colaborador@balneario.ar",
+		"password": "colabora",
+		"role": "contributor"
+	}
+]

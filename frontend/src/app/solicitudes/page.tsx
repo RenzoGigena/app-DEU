@@ -17,7 +17,7 @@ import { Solicitud } from "@/types/balnearios"
 import { SolicitudCard } from "@/components/SolicitudCard"
 import { Textarea } from "@/components/ui/textarea"
 import type { User } from "@/helpers/AuthProvider"
-import solicitudesData from "@/app/mocks/solicitudes.json"
+import solicitudesData from "@/mocks/solicitudes.json"
 import { toast } from "sonner"
 
 /* --- tipos y mocks (sin cambios) --- */

@@ -8,6 +8,8 @@ import React, {
 	useState,
 } from "react"
 
+import users from "@/mocks/users.json"
+
 /* ─────────── tipos ─────────── */
 export type Role = "admin" | "contributor" | "visitor"
 export type User = { mail: string; role: Role }
@@ -16,17 +18,6 @@ type StoredUser = User & { password: string }
 /* ─────────── constantes LS ─────────── */
 const LS_USERS = "balneario-users"
 const LS_SESSION = "balneario-session"
-
-/* ─────────── datos por defecto ─────────── */
-const DEFAULT_USERS: StoredUser[] = [
-	{ mail: "admin@balneario.ar", password: "admin123", role: "admin" },
-	{ mail: "admin@gmail.com.ar", password: "admin123", role: "admin" },
-	{
-		mail: "colaborador@balneario.ar",
-		password: "colabora",
-		role: "contributor",
-	},
-]
 
 /* ─────────── helpers seguros ─────────── */
 const safeParse = <T,>(json: string | null, fallback: T): T => {
@@ -38,7 +29,7 @@ const safeParse = <T,>(json: string | null, fallback: T): T => {
 }
 
 const loadUsers = (): StoredUser[] =>
-	safeParse<StoredUser[]>(localStorage.getItem(LS_USERS), DEFAULT_USERS)
+	safeParse<StoredUser[]>(localStorage.getItem(LS_USERS), users as StoredUser[])
 
 const saveUsers = (users: StoredUser[]) =>
 	localStorage.setItem(LS_USERS, JSON.stringify(users))
@@ -67,7 +58,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
 	/* inicialización */
 	useEffect(() => {
-		if (!localStorage.getItem(LS_USERS)) saveUsers(DEFAULT_USERS)
+		if (!localStorage.getItem(LS_USERS)) saveUsers(users as StoredUser[])
 		const ses = loadSession()
 		if (ses) setUser(ses)
 	}, [])
