@@ -31,7 +31,7 @@ export default async function BalnearioDetail({ params }: any) {
                     {balneario.nombre}
                 </h1>
 
-                <p className="text-gray-600 text-lg">{balneario.localidad}</p>
+                <p className="text-gray-600 text-lg">Localidad: {balneario.localidad}</p>
 
                 <DaltonicImage
                     src={balneario.imagen}
@@ -50,26 +50,26 @@ export default async function BalnearioDetail({ params }: any) {
 
                     <ul className="space-y-2" role="list">
                         {balneario.servicios.map((servicio, index) => {
-                            const servicioId = `servicio-${index}`;
-                            return (
-                                <li
-                                    key={index}
-                                    id={servicioId}
-                                    role="listitem"
-                                    className="flex items-center gap-2"
-                                    aria-label={`${servicio.nombreServicio}: ${
-                                        servicio.tiene ? "disponible" : "no disponible"
-                                    }`}
-                                >
-                                    <span
-                                        aria-hidden="true"
-                                        className={`w-4 h-4 rounded-full ${
-                                            servicio.tiene ? "bg-green-500" : "bg-red-400"
-                                        }`}
-                                    />
-                                    <span>{servicio.nombreServicio}</span>
-                                </li>
-                            );
+                        const disponible = servicio.tiene ? "disponible" : "no disponible";
+
+                        return (
+                            <li
+                            key={index}
+                            className="flex items-center gap-2"
+                            role="listitem"
+                            >
+                            <span
+                                aria-hidden="true"
+                                className={`w-4 h-4 rounded-full ${
+                                servicio.tiene ? "bg-green-500" : "bg-red-400"
+                                }`}
+                            />
+                            <span>
+                                <span className="font-medium">{servicio.nombreServicio}</span>:{" "}
+                                <span>{disponible}</span>
+                            </span>
+                            </li>
+                        );
                         })}
                     </ul>
                 </section>
