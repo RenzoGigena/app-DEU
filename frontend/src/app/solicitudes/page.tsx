@@ -134,7 +134,7 @@ export default function SolicitudesPage() {
 					<DialogFooter className="flex gap-3 pt-4">
 						<Button
 							variant="secondary"
-							className="focus-visible:ring-black focus-visible:ring-offset-2"
+							className="focus-visible:ring-black focus-visible:ring-offset-2 bg-green-600 hover:bg-green-700"
 							aria-label="Confirmar aprobación"
 							onClick={doApprove}
 						>
