@@ -5,6 +5,7 @@ import ClientProvider from "@/helpers/ClientProvider"
 import type { ReactNode } from "react"
 import StickyNavbar from "@/components/stickynavbar"
 import { Toaster } from "@/components/ui/sonner"
+import "leaflet/dist/leaflet.css";
 
 export const metadata = {
 	title: "Balnearios Río de la Plata",
