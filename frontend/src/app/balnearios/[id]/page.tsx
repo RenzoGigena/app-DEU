@@ -13,7 +13,7 @@ export default async function BalnearioDetail({ params }: any) {
 
     if (!balneario) return notFound();
 
-    // Función para obtener una descripción de nivel de contaminación (ahora para escala 0-100)
+    // Función para obtener una descripción de nivel de contaminación
     const getContaminationLevel = (value: number) => {
         if (value >= 70) return "Alto"; // 70% o más
         if (value >= 40) return "Medio"; // Entre 40% y 69%
