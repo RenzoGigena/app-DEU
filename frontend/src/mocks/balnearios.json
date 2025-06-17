@@ -28,7 +28,7 @@
 		"nombre": "Camping Recreo Berazategui",
 		"localidad": "Berazategui",
 		"descripcion": "Un espacio ideal para acampar y disfrutar de la naturaleza, con instalaciones básicas para toda la familia.",
-		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagen": "/images/balnearios/berazategui1.jpg",
 		"imagenAlt": "Camping Recreo Berazategui",
 		"servicios": [
 			{ "nombreServicio": "Zona de acampe", "tiene": true },
@@ -51,7 +51,7 @@
 		"nombre": "Costanera Hudson",
 		"localidad": "Hudson",
 		"descripcion": "Un paseo costero tranquilo con vistas al río, ideal para caminatas y pasar el día al aire libre.",
-		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagen": "/images/balnearios/hudson1.jpg",
 		"imagenAlt": "Costanera Hudson",
 		"servicios": [
 			{ "nombreServicio": "Estacionamiento", "tiene": true },
@@ -70,10 +70,10 @@
 	{
 		"id": "4",
 		"nombre": "Camping la abuela Gladys",
-		"localidad": "Ensenada",
+		"localidad": "Punta Lara",
 		"descripcion": "Camping familiar con acceso a la costa, perfecto para un escape de fin de semana.",
-		"imagen": "/images/balnearios/quilmes1.jpg",
-		"imagenAlt": "Camping Abuela Gladys en Ensenada",
+		"imagen": "/images/balnearios/puntaLara1.jpg",
+		"imagenAlt": "Camping Abuela Gladys en Punta Lara",
 		"servicios": [
 			{ "nombreServicio": "Zona de acampe", "tiene": true },
 			{ "nombreServicio": "Parrillas", "tiene": true },
@@ -93,7 +93,7 @@
 		"nombre": "Muelle de Pesca Municipal",
 		"localidad": "Punta Lara",
 		"descripcion": "Un muelle popular para la pesca deportiva, con hermosas vistas del Río de la Plata al atardecer.",
-		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagen": "/images/balnearios/puntaLara2.jpg",
 		"imagenAlt": "Muelle de Pesca Municipal en Punta Lara",
 		"servicios": [
 			{ "nombreServicio": "Alquiler de equipos de pesca", "tiene": false },
@@ -110,9 +110,9 @@
 	{
 		"id": "6",
 		"nombre": "Camping La Marcelita",
-		"localidad": "Ensenada",
+		"localidad": "PuntaLara",
 		"descripcion": "Un camping acogedor con acceso directo a la playa, ideal para escapadas en contacto con la naturaleza.",
-		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagen": "/images/balnearios/puntaLara3.jpg",
 		"imagenAlt": "Camping La Marcelita",
 		"servicios": [
 			{ "nombreServicio": "Zona de acampe", "tiene": true },
@@ -133,7 +133,7 @@
 		"nombre": "Hito Punta Lara",
 		"localidad": "Punta Lara",
 		"descripcion": "Un punto de referencia en la costa, ideal para apreciar la inmensidad del río y el paisaje natural.",
-		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagen": "/images/balnearios/puntaLara4.jpg",
 		"imagenAlt": "Hito en Punta Lara",
 		"servicios": [
 			{ "nombreServicio": "Área de descanso", "tiene": true },
@@ -152,7 +152,7 @@
 		"nombre": "Mesitas al Río",
 		"localidad": "Punta Lara",
 		"descripcion": "Un sector de la costa con mesas y bancos, perfecto para picnics y reuniones al aire libre junto al río.",
-		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagen": "/images/balnearios/puntaLara5.jpg",
 		"imagenAlt": "Mesas al Río en Punta Lara",
 		"servicios": [
 			{ "nombreServicio": "Mesas y bancos", "tiene": true },
@@ -169,9 +169,9 @@
 	{
 		"id": "9",
 		"nombre": "Playa Palo Blanco",
-		"localidad": "Punta Indio",
+		"localidad": "Los Naranjos",
 		"descripcion": "Una playa más rústica y natural, ideal para quienes buscan tranquilidad y un entorno menos concurrido.",
-		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagen": "/images/balnearios/losNaranjos1.jpg",
 		"imagenAlt": "Playa Palo Blanco",
 		"servicios": [
 			{ "nombreServicio": "Área de playa", "tiene": true },
@@ -188,9 +188,9 @@
 	{
 		"id": "10",
 		"nombre": "Playa Punta Blanca",
-		"localidad": "Punta Indio",
+		"localidad": "Los Naranjos",
 		"descripcion": "Una extensa playa virgen, perfecta para disfrutar de la serenidad del paisaje y la naturaleza costera.",
-		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagen": "/images/balnearios/losNaranjos2.jpg",
 		"imagenAlt": "Playa Punta Blanca",
 		"servicios": [
 			{ "nombreServicio": "Área de playa", "tiene": true },
@@ -209,7 +209,7 @@
 		"nombre": "Atalaya Espigón",
 		"localidad": "Magdalena",
 		"descripcion": "Un espigón con vistas panorámicas al río, popular entre pescadores y para observar la vida silvestre.",
-		"imagen": "/images/balnearios/atalaya_espigon1.jpg",
+		"imagen": "/images/balnearios/magdalena1.jpg",
 		"imagenAlt": "Espigón en Atalaya",
 		"servicios": [
 			{ "nombreServicio": "Pesca", "tiene": true },
@@ -226,10 +226,10 @@
 	{
 		"id": "12",
 		"nombre": "Playa Las Ruinas",
-		"localidad": "Magdalena",
+		"localidad": "Punta Indio",
 		"descripcion": "Una playa con encanto histórico, con los restos de antiguas construcciones que le dan un toque único.",
-		"imagen": "/images/balnearios/las_ruinas1.jpg",
-		"imagenAlt": "Playa Las Ruinas en Magdalena",
+		"imagen": "/images/balnearios/puntaIndio1.jpg",
+		"imagenAlt": "Playa Las Ruinas en Punta Indio",
 		"servicios": [
 			{ "nombreServicio": "Área de playa", "tiene": true },
 			{ "nombreServicio": "Sitio histórico", "tiene": true },
