@@ -28,11 +28,12 @@ export default function UnirsePage() {
 	const [regErr, setRegErr] = useState<Record<string, string>>({})
 	const [logErr, setLogErr] = useState<Record<string, string>>({})
 
+	/* ajustar vista en mobile */
 	useEffect(() => {
 		if (!user && isMobile) setView("select")
 	}, [isMobile, user])
 
-	/* helpers de cambio (typed) */
+	/* helpers typed */
 	const handleRegChange = <K extends keyof typeof reg>(f: K, v: string) =>
 		setReg((p) => ({ ...p, [f]: v }))
 	const handleLogChange = <K extends keyof typeof log>(f: K, v: string) =>
@@ -49,6 +50,7 @@ export default function UnirsePage() {
 			err.password = "La contraseña debe tener 6 caracteres o más"
 		if (reg.password !== reg.confirm)
 			err.confirm = "Las contraseñas no coinciden"
+
 		setRegErr(err)
 		if (Object.keys(err).length) {
 			document.getElementById(`reg-${Object.keys(err)[0]}`)?.focus()
@@ -92,7 +94,8 @@ export default function UnirsePage() {
 		toast("Sesión cerrada")
 		setView("select")
 	}
-	/* Sesión iniciada */
+
+	/* sesión iniciada */
 	if (user) {
 		return (
 			<main
@@ -107,9 +110,11 @@ export default function UnirsePage() {
 					Rol: <span className="font-semibold">{user.role}</span>
 				</p>
 				<Button
-					onClick={handleLogout}
 					aria-label="Cerrar sesión"
-					className="bg-primary/90 hover:bg-primary focus-visible:ring-2 focus-visible:ring-offset-2"
+					onClick={handleLogout}
+					className="bg-primary text-white hover:bg-primary/90
+                     focus-visible:ring-2 focus-visible:ring-offset-2
+                     focus-visible:ring-black"
 				>
 					Cerrar sesión
 				</Button>
@@ -117,7 +122,7 @@ export default function UnirsePage() {
 		)
 	}
 
-	/* --- página principal -------------------------------------------------- */
+	/*  página principal  */
 	return (
 		<main
 			role="main"
@@ -131,23 +136,26 @@ export default function UnirsePage() {
 				</p>
 			</header>
 
-			{/* selector mobile */}
 			{view === "select" && (
 				<nav
-					className="flex flex-col gap-6 md:hidden"
 					aria-label="Selector de acción"
+					className="flex flex-col gap-6 md:hidden"
 				>
 					<Button
 						aria-label="Ir a formulario de registro"
-						className="h-14 text-lg bg-primary/90 hover:bg-primary"
+						className="h-14 text-lg bg-primary text-white hover:bg-primary/90
+                       focus-visible:ring-2 focus-visible:ring-offset-2
+                       focus-visible:ring-black"
 						onClick={() => setView("register")}
 					>
 						Registrarse →
 					</Button>
 					<Button
 						aria-label="Ir a formulario de inicio de sesión"
-						className="h-14 text-lg"
 						variant="outline"
+						className="h-14 text-lg
+                       focus-visible:ring-2 focus-visible:ring-offset-2
+                       focus-visible:ring-black"
 						onClick={() => setView("login")}
 					>
 						Iniciar sesión →
@@ -155,7 +163,7 @@ export default function UnirsePage() {
 				</nav>
 			)}
 
-			{/* Escritorio */}
+			{/* escritorio */}
 			<div
 				className="hidden md:grid md:grid-cols-2 md:gap-8"
 				aria-label="Formularios de acceso"
@@ -178,7 +186,7 @@ export default function UnirsePage() {
 				/>
 			</div>
 
-			{/* Mobile */}
+			{/* mobile */}
 			<div className="md:hidden">
 				{view === "register" && (
 					<RegisterForm

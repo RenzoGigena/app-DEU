@@ -16,43 +16,20 @@ import { Input } from "@/components/ui/input"
 import { Solicitud } from "@/types/balnearios"
 import { SolicitudCard } from "@/components/SolicitudCard"
 import { Textarea } from "@/components/ui/textarea"
+import type { User } from "@/helpers/AuthProvider"
+import solicitudesData from "@/app/mocks/solicitudes.json"
 import { toast } from "sonner"
 
 /* --- tipos y mocks (sin cambios) --- */
-type Role = "admin" | "contributor"
-type User = { mail: string; role: Role }
 const LS_SESSION = "balneario-session"
 const getSession = (): User | null =>
 	JSON.parse(localStorage.getItem(LS_SESSION) || "null")
-
-const INITIAL_SOLICITUDES: Solicitud[] = [
-	{
-		id: "1",
-		nombreBalneario: "Balneario 12",
-		localidad: "Berisso",
-		descripcion: "Ubicación: Calle 9 #432.\nServicios: Baños, Parrilla.",
-		servicios: ["Baños", "Parrilla"],
-		telefono: "221 4924523",
-		url: "balneario12.com",
-		contribuidor: "pedro.pascal@gmail.com",
-	},
-	{
-		id: "2",
-		nombreBalneario: "Ribera Sur",
-		localidad: "Avellaneda",
-		descripcion: "Amplio parque costero con fogones.",
-		servicios: ["Fogones", "Estacionamiento"],
-		telefono: "11 3216-5498",
-		url: "ribera.avellaneda.ar",
-		contribuidor: "ana.dev@correo.com",
-	},
-]
 
 export default function SolicitudesPage() {
 	const [session, setSession] = useState<User | null>(null)
 
 	const [solicitudes, setSolicitudes] = useState<Solicitud[]>(() => [
-		...INITIAL_SOLICITUDES,
+		...(solicitudesData as Solicitud[]),
 	])
 	const [search, setSearch] = useState("")
 
@@ -147,7 +124,7 @@ export default function SolicitudesPage() {
 
 			{/* diálogo aprobación */}
 			<Dialog open={!!approveId} onOpenChange={() => setApproveId(null)}>
-				<DialogContent>
+				<DialogContent showCloseButton={false}>
 					<DialogHeader>
 						<DialogTitle>Confirmar aprobación</DialogTitle>
 						<DialogDescription>
@@ -157,13 +134,18 @@ export default function SolicitudesPage() {
 					<DialogFooter className="flex gap-3 pt-4">
 						<Button
 							variant="secondary"
+							className="focus-visible:ring-black focus-visible:ring-offset-2"
 							aria-label="Confirmar aprobación"
 							onClick={doApprove}
 						>
 							Aprobar
 						</Button>
 						<DialogTrigger asChild>
-							<Button variant="outline" aria-label="Cancelar aprobación">
+							<Button
+								variant="outline"
+								aria-label="Cancelar aprobación"
+								className="focus-visible:ring-black focus-visible:ring-offset-2"
+							>
 								Cancelar
 							</Button>
 						</DialogTrigger>
@@ -173,7 +155,7 @@ export default function SolicitudesPage() {
 
 			{/* diálogo rechazo */}
 			<Dialog open={!!rejectId} onOpenChange={() => setRejectId(null)}>
-				<DialogContent>
+				<DialogContent showCloseButton={false}>
 					<DialogHeader>
 						<DialogTitle>Rechazar solicitud</DialogTitle>
 						<DialogDescription>
@@ -192,12 +174,17 @@ export default function SolicitudesPage() {
 							variant="destructive"
 							aria-label="Confirmar rechazo"
 							onClick={doReject}
+							className="focus-visible:ring-black focus-visible:ring-offset-2"
 							disabled={!motivo.trim()}
 						>
 							Confirmar
 						</Button>
 						<DialogTrigger asChild>
-							<Button variant="outline" aria-label="Cancelar rechazo">
+							<Button
+								variant="outline"
+								aria-label="Cancelar rechazo"
+								className="focus-visible:ring-black focus-visible:ring-offset-2"
+							>
 								Cancelar
 							</Button>
 						</DialogTrigger>

@@ -36,7 +36,9 @@ export function RegisterForm({
 			className="space-y-4 border rounded-lg p-6 shadow w-full max-w-md mx-auto"
 		>
 			{showBack && <BackButton to="select" onBack={onBack} />}
-			<h3 className="text-xl font-semibold text-primary mb-2">Registrate</h3>
+
+			{/* h2 para jerarquía correcta */}
+			<h2 className="text-xl font-semibold text-primary mb-2">Registrate</h2>
 
 			<Input
 				id="reg-nombre"
@@ -117,9 +119,11 @@ export function RegisterForm({
 			)}
 
 			<Button
-				className="w-full"
-				onClick={onSubmit}
 				aria-label="Enviar registro"
+				onClick={onSubmit}
+				className="w-full bg-primary text-white hover:bg-primary/90
+                   focus-visible:ring-2 focus-visible:ring-offset-2
+                   focus-visible:ring-black"
 			>
 				Registrar
 			</Button>

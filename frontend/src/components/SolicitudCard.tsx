@@ -50,14 +50,16 @@ export function SolicitudCard({
 
 			<div className="flex flex-col gap-2 md:w-40">
 				<Button
-					variant="secondary"
+					className="bg-green-600 hover:bg-green-700 text-white focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none"
 					aria-label="Solicitar confirmación para aprobar"
 					onClick={() => onApproveRequest(s.id)}
 				>
 					Aprobar
 				</Button>
+
 				<Button
 					variant="destructive"
+					className="focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none"
 					aria-label="Solicitar motivo de rechazo"
 					onClick={() => onRejectRequest(s.id)}
 				>
