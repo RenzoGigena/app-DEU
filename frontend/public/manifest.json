@@ -1,6 +1,6 @@
 {
 	"name": "PWA_DEU",
-	"short_name": "NextPWA",
+	"short_name": "BalneariosApp",
 	"description": "A Progressive Web App with Next.js and TypeScript",
 	"start_url": "/",
 	"display": "standalone",
