@@ -46,20 +46,20 @@ export default async function BalnearioDetail({ params }: any) {
 							return (
 								<li
 									key={index}
-									className="flex items-center gap-2"
+									id={servicioId}
 									role="listitem"
+									className="flex items-center gap-2"
+									aria-label={`${servicio.nombreServicio}: ${
+										servicio.tiene ? "disponible" : "no disponible"
+									}`}
 								>
-									<input
-										id={servicioId}
-										type="checkbox"
-										checked={servicio.tiene}
-										readOnly
-										className="accent-blue-500"
-										tabIndex={-1}
-										aria-checked={servicio.tiene}
-										aria-disabled="true"
+									<span
+										aria-hidden="true"
+										className={`w-4 h-4 rounded-full ${
+											servicio.tiene ? "bg-green-500" : "bg-red-400"
+										}`}
 									/>
-									<label htmlFor={servicioId}>{servicio.nombreServicio}</label>
+									<span>{servicio.nombreServicio}</span>
 								</li>
 							)
 						})}
