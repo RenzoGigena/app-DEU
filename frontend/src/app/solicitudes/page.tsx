@@ -162,7 +162,7 @@ export default function SolicitudesPage() {
 	return (
 		<main
 			role="main"
-			className="flex-1 mx-auto w-full max-w-5xl px-3 py-8 space-y-8"
+			className="flex-1 mx-auto w-full max-w-7xl px-3 py-8 space-y-8"
 		>
 			<h1 className="text-3xl font-bold text-primary">
 				Gestión de solicitudes

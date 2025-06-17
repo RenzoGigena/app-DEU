@@ -6,11 +6,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import type { MouseEventHandler } from "react"
 
-interface LoginFormProps {
+type Values = { mail: string; password: string }
+interface Props {
 	showBack?: boolean
 	errors: Record<string, string>
-	values: { mail: string; password: string }
-	onChange: (field: string, value: string) => void
+	values: Values
+	onChange: <K extends keyof Values>(field: K, value: string) => void
 	onSubmit: MouseEventHandler<HTMLButtonElement>
 	onBack: () => void
 }
@@ -22,7 +23,7 @@ export function LoginForm({
 	onChange,
 	onSubmit,
 	onBack,
-}: LoginFormProps) {
+}: Props) {
 	return (
 		<section
 			role="form"
@@ -35,32 +36,44 @@ export function LoginForm({
 			</h3>
 
 			{errors.global && (
-				<div className="text-red-600 flex items-center gap-2 text-sm">
-					<AlertCircle className="w-4 h-4" />
-					{errors.global}
+				<div
+					role="alert"
+					className="flex items-center gap-2 text-red-600 text-sm"
+				>
+					<AlertCircle className="w-4 h-4" /> {errors.global}
 				</div>
 			)}
 
 			<Input
+				id="log-mail"
+				type="email"
 				placeholder="Mail"
 				aria-label="Mail"
-				type="email"
+				aria-invalid={!!errors.mail}
 				value={values.mail}
 				onChange={(e) => onChange("mail", e.target.value)}
 				className={errors.mail ? "border-red-500" : ""}
 			/>
-			{errors.mail && <p className="text-xs text-red-600">{errors.mail}</p>}
+			{errors.mail && (
+				<p role="alert" className="text-xs text-red-600">
+					{errors.mail}
+				</p>
+			)}
 
 			<Input
+				id="log-password"
+				type="password"
 				placeholder="Contraseña"
 				aria-label="Contraseña"
-				type="password"
+				aria-invalid={!!errors.password}
 				value={values.password}
 				onChange={(e) => onChange("password", e.target.value)}
 				className={errors.password ? "border-red-500" : ""}
 			/>
 			{errors.password && (
-				<p className="text-xs text-red-600">{errors.password}</p>
+				<p role="alert" className="text-xs text-red-600">
+					{errors.password}
+				</p>
 			)}
 
 			<Button className="w-full" onClick={onSubmit} aria-label="Entrar">
