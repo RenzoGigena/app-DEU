@@ -10,6 +10,7 @@ import React, { useState } from "react"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 import Link from "next/link"
 import { Menu } from "lucide-react"
 import { useAuth } from "@/helpers/AuthProvider"
@@ -33,14 +34,23 @@ export default function StickyNavbar() {
 	return (
 		<header className="sticky top-0 z-50 w-full border-b bg-[var(--primary)] text-[var(--primary-foreground)] backdrop-blur-md py-1 shadow-sm">
 			<div className="container mx-auto flex items-center justify-between px-4">
+				<div className="flex items-center gap-2">
+					<Image
+						src="/favicon-96x96.png"
+						alt="Logo Balnearios Río de la Plata"
+						width={64}
+						height={64}
+						className="hidden lg:block"
+					/>
+					<Link
+						href="/"
+						aria-label="Inicio"
+						className="text-2xl font-bold tracking-tight"
+					>
+						Balnearios Río de la Plata
+					</Link>
+				</div>
 				{/* Logo */}
-				<Link
-					href="/"
-					aria-label="Inicio"
-					className="text-2xl font-bold tracking-tight"
-				>
-					Balnearios Río de la Plata
-				</Link>
 
 				{/* Navegación desktop */}
 				<NavigationMenu className="hidden lg:flex">
