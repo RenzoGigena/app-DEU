@@ -48,8 +48,16 @@ export default function ConfigurationPage() {
   }, [fontSize])
 
   return (
+  <main className="max-w-3xl mx-auto p-6">
+
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold">Configuración de Accesibilidad</h2>
+      <header className="text-center space-y-2">
+				<h1 className="text-3xl font-bold text-primary">Configuracion de accesibilidad</h1>
+				<p className="text-muted-foreground max-w-md mx-auto">
+					Aqui puedes cambiar la configuración de accesibilidad del sitio, como el tamaño de fuente, el modo daltónico y el color del tema. 
+          Estas opciones te ayudarán a personalizar tu experiencia de navegación.
+				</p>
+			</header>
 
       <div>
         <label className="block font-semibold">Tamaño de fuente</label>
@@ -89,5 +97,6 @@ export default function ConfigurationPage() {
         </div>
       )}
     </div>
+  </main>
   )
 }

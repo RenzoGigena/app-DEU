@@ -82,5 +82,19 @@
 			{ "nombreServicio": "Estacionamiento", "tiene": false },
 			{ "nombreServicio": "Pileta", "tiene": false }
 		]
+	},
+	{
+		"id": "7",
+		"nombre": "Balneario Buenos Aires",
+		"localidad": "Ensenada",
+		"descripcion": "Caminatas frente al río y parque costero.",
+		"imagen": "/images/balnearios/ribera-avellaneda.jpg",
+		"imagenAlt": "Ribera de Avellaneda",
+		"detalle": "Moderno paseo con espacios recreativos.",
+		"servicios": [
+			{ "nombreServicio": "WiFi", "tiene": true },
+			{ "nombreServicio": "Estacionamiento", "tiene": false },
+			{ "nombreServicio": "Pileta", "tiene": false }
+		]
 	}
 ]
