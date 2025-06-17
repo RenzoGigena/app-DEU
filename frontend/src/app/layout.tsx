@@ -15,6 +15,11 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="es" suppressHydrationWarning>
+			<head>
+				<link rel="manifest" href="/manifest.json" />
+				<meta name="apple-mobile-web-app-capable" content="yes" />
+				<link rel="apple-touch-icon" href="/icons/icon-192.png" />
+			</head>
 			<body className="bg-background text-foreground">
 				<AuthProvider>
 					<ClientProvider>
@@ -24,11 +29,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 					</ClientProvider>
 				</AuthProvider>
 
-				<svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
+				<svg xmlns="http://www.w3.org/2000/svg" style={{ display: "none" }}>
 					<filter id="daltonic-filter">
 						<feColorMatrix
-						type="matrix"
-						values="
+							type="matrix"
+							values="
 							0.625, 0.7,   0,   0, 0,
 							0.375, 0.3,   0,   0, 0,
 							0,     0,     1,   0, 0,
@@ -37,7 +42,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 						/>
 					</filter>
 				</svg>
-
 			</body>
 		</html>
 	)

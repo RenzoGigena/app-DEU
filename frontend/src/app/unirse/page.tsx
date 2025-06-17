@@ -106,9 +106,12 @@ export default function UnirsePage() {
 				<p className="text-muted-foreground max-w-sm">
 					Gracias por colaborar con nosotros, tu aporte marca la diferencia.
 				</p>
-				<p className="text-sm">
-					Rol: <span className="font-semibold">{user.role}</span>
-				</p>
+				{user.role === "admin" && (
+					<p className="text-sm">
+						Rol: <span className="font-semibold">{user.role}</span>
+					</p>
+				)}
+
 				<Button
 					aria-label="Cerrar sesión"
 					onClick={handleLogout}
