@@ -4,13 +4,16 @@ export type Servicio = {
 }
 
 export type Balneario = {
+    longitud: number
+    latitud: number
+    contaminacionArena: number
+    contaminacionAgua: number
 	id: string
 	nombre: string
 	localidad: string
 	descripcion: string
 	imagen: string
 	imagenAlt: string
-	detalle: string
 	servicios: Servicio[]
 }
 

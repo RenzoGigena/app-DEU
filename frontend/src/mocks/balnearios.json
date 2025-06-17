@@ -1,107 +1,245 @@
 [
 	{
 		"id": "1",
-		"nombre": "Balneario La Costa",
-		"localidad": "Mar del Plata",
+		"nombre": "Costanera y Balneario Quilmes",
+		"localidad": "Quilmes",
 		"descripcion": "Playas amplias, actividades y más.",
-		"imagen": "/images/balnearios/balneario-la-costa.jpg",
+		"imagen": "/images/balnearios/quilmes1.jpg",
 		"imagenAlt": "Balneario La Costa en Mar del Plata",
-		"detalle": "Servicios completos y ubicación ideal.",
 		"servicios": [
-			{ "nombreServicio": "WiFi", "tiene": true },
+			{ "nombreServicio": "WiFi", "tiene": false },
 			{ "nombreServicio": "Estacionamiento", "tiene": true },
+			{ "nombreServicio": "Entrada accesible", "tiene": true },
 			{ "nombreServicio": "Pileta", "tiene": false },
-			{ "nombreServicio": "Buffet", "tiene": false }
-		]
+			{ "nombreServicio": "Buffet", "tiene": false },
+			{ "nombreServicio": "Kiosco", "tiene": false },
+			{ "nombreServicio": "Baños", "tiene": false },
+			{ "nombreServicio": "Alquiler de reposeras", "tiene": false },
+			{ "nombreServicio": "Guardavidas", "tiene": false },
+			{ "nombreServicio": "Permite mascotas", "tiene": true }
+		],
+		"latitud": -34.711041,
+ 		"longitud": -58.221209,
+		"contaminacionAgua": 26,
+		"contaminacionArena": 88
 	},
 	{
 		"id": "2",
-		"nombre": "Balneario El Paraíso",
-		"localidad": "Villa Gesell",
-		"descripcion": "Ideal para descansar y disfrutar en familia.",
-		"imagen": "/images/balnearios/balneario-el-paraiso.jpg",
-		"imagenAlt": "Balneario El Paraiso en Villa Gesell",
-		"detalle": "Servicios premium y carpas.",
+		"nombre": "Camping Recreo Berazategui",
+		"localidad": "Berazategui",
+		"descripcion": "Un espacio ideal para acampar y disfrutar de la naturaleza, con instalaciones básicas para toda la familia.",
+		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagenAlt": "Camping Recreo Berazategui",
 		"servicios": [
-			{ "nombreServicio": "WiFi", "tiene": false },
-			{ "nombreServicio": "Estacionamiento", "tiene": true },
-			{ "nombreServicio": "Pileta", "tiene": true },
-			{ "nombreServicio": "Buffet", "tiene": false }
-		]
+			{ "nombreServicio": "Zona de acampe", "tiene": true },
+			{ "nombreServicio": "Parrillas", "tiene": true },
+			{ "nombreServicio": "Baños", "tiene": true },
+			{ "nombreServicio": "Duchas", "tiene": true },
+			{ "nombreServicio": "Kiosco", "tiene": true },
+			{ "nombreServicio": "Electricidad", "tiene": false },
+			{ "nombreServicio": "Pileta", "tiene": false },
+			{ "nombreServicio": "Guardavidas", "tiene": false },
+			{ "nombreServicio": "Permite mascotas", "tiene": true }
+		],
+		"latitud": -34.7700,
+ 		"longitud": -58.1900,
+		"contaminacionAgua": 12,
+		"contaminacionArena": 26
 	},
 	{
 		"id": "3",
-		"nombre": "Balneario Hudson",
-		"localidad": "Berazategui",
-		"descripcion": "Naturaleza y tranquilidad cerca de la ciudad.",
-		"imagen": "/images/balnearios/balneario-hudson.jpg",
-		"imagenAlt": "Balneario Hudson en Berazategui",
-		"detalle": "Ideal para picnic y actividades al aire libre.",
+		"nombre": "Costanera Hudson",
+		"localidad": "Hudson",
+		"descripcion": "Un paseo costero tranquilo con vistas al río, ideal para caminatas y pasar el día al aire libre.",
+		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagenAlt": "Costanera Hudson",
 		"servicios": [
-			{ "nombreServicio": "WiFi", "tiene": false },
 			{ "nombreServicio": "Estacionamiento", "tiene": true },
-			{ "nombreServicio": "Pileta", "tiene": false },
-			{ "nombreServicio": "Buffet", "tiene": false }
-		]
+			{ "nombreServicio": "Baños públicos", "tiene": false },
+			{ "nombreServicio": "Áreas verdes", "tiene": true },
+			{ "nombreServicio": "Zona de picnic", "tiene": false },
+			{ "nombreServicio": "Kiosco", "tiene": false },
+			{ "nombreServicio": "Alquiler de bicicletas", "tiene": false },
+			{ "nombreServicio": "Permite mascotas", "tiene": true }
+		],
+		"latitud": -34.7870,
+ 		"longitud": -58.1060,
+		"contaminacionAgua": 38,
+		"contaminacionArena": 61
 	},
 	{
 		"id": "4",
-		"nombre": "Balneario Municipal Quilmes",
-		"localidad": "Quilmes",
-		"descripcion": "Un clásico de la ribera sur del Río de la Plata.",
-		"imagen": "/images/balnearios/balneario-quilmes.jpg",
-		"imagenAlt": "Balneario Quilmes",
-		"detalle": "Espacios públicos renovados con vista al río.",
+		"nombre": "Camping Abuela Gladys",
+		"localidad": "Ensenada",
+		"descripcion": "Camping familiar con acceso a la costa, perfecto para un escape de fin de semana.",
+		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagenAlt": "Camping Abuela Gladys en Ensenada",
 		"servicios": [
-			{ "nombreServicio": "WiFi", "tiene": true },
-			{ "nombreServicio": "Estacionamiento", "tiene": true },
-			{ "nombreServicio": "Pileta", "tiene": false },
-			{ "nombreServicio": "Buffet", "tiene": false }
-		]
+			{ "nombreServicio": "Zona de acampe", "tiene": true },
+			{ "nombreServicio": "Parrillas", "tiene": true },
+			{ "nombreServicio": "Baños", "tiene": true },
+			{ "nombreServicio": "Duchas", "tiene": true },
+			{ "nombreServicio": "Proveeduría", "tiene": true },
+			{ "nombreServicio": "Juegos infantiles", "tiene": false },
+			{ "nombreServicio": "Permite mascotas", "tiene": false }
+		],
+		"latitud": -34.8000,
+ 		"longitud": -57.9900,
+		"contaminacionAgua": 15,
+		"contaminacionArena": 23
 	},
 	{
 		"id": "5",
-		"nombre": "Balneario Punta Lara",
-		"localidad": "Ensenada",
-		"descripcion": "Aguas tranquilas y áreas verdes extensas.",
-		"imagen": "/images/balnearios/balneario-punta-lara.jpg",
-		"imagenAlt": "Balneario Punta Lara en Ensenada",
-		"detalle": "Balneario familiar con espacios para deporte.",
+		"nombre": "Muelle de Pesca Municipal",
+		"localidad": "Punta Lara",
+		"descripcion": "Un muelle popular para la pesca deportiva, con hermosas vistas del Río de la Plata al atardecer.",
+		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagenAlt": "Muelle de Pesca Municipal en Punta Lara",
 		"servicios": [
-			{ "nombreServicio": "WiFi", "tiene": false },
-			{ "nombreServicio": "Estacionamiento", "tiene": true },
-			{ "nombreServicio": "Pileta", "tiene": true },
-			{ "nombreServicio": "Buffet", "tiene": false }
-		]
+			{ "nombreServicio": "Alquiler de equipos de pesca", "tiene": false },
+			{ "nombreServicio": "Baños", "tiene": true },
+			{ "nombreServicio": "Kiosco", "tiene": true },
+			{ "nombreServicio": "Iluminación nocturna", "tiene": true },
+			{ "nombreServicio": "Vigilancia", "tiene": false }
+		],
+		"latitud": -34.8210,
+ 		"longitud": -57.9750,
+		"contaminacionAgua": 13,
+		"contaminacionArena": 45
 	},
 	{
 		"id": "6",
-		"nombre": "Ribera de Avellaneda",
-		"localidad": "Avellaneda",
-		"descripcion": "Caminatas frente al río y parque costero.",
-		"imagen": "/images/balnearios/ribera-avellaneda.jpg",
-		"imagenAlt": "Ribera de Avellaneda",
-		"detalle": "Moderno paseo con espacios recreativos.",
+		"nombre": "Camping La Marcelita",
+		"localidad": "Ensenada",
+		"descripcion": "Un camping acogedor con acceso directo a la playa, ideal para escapadas en contacto con la naturaleza.",
+		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagenAlt": "Camping La Marcelita",
 		"servicios": [
-			{ "nombreServicio": "WiFi", "tiene": true },
-			{ "nombreServicio": "Estacionamiento", "tiene": false },
-			{ "nombreServicio": "Pileta", "tiene": false },
-			{ "nombreServicio": "Buffet", "tiene": false }
-		]
+			{ "nombreServicio": "Zona de acampe", "tiene": true },
+			{ "nombreServicio": "Parrillas", "tiene": true },
+			{ "nombreServicio": "Baños", "tiene": true },
+			{ "nombreServicio": "Duchas", "tiene": true },
+			{ "nombreServicio": "Proveeduría", "tiene": false },
+			{ "nombreServicio": "Acceso a la playa", "tiene": true },
+			{ "nombreServicio": "Permite mascotas", "tiene": false }
+		],
+		"latitud": -34.8300,
+ 		"longitud": -57.9800,
+		"contaminacionAgua": 24,
+		"contaminacionArena": 67
 	},
 	{
 		"id": "7",
-		"nombre": "Balneario Buenos Aires",
-		"localidad": "Ensenada",
-		"descripcion": "Caminatas frente al río y parque costero.",
-		"imagen": "/images/balnearios/ribera-avellaneda.jpg",
-		"imagenAlt": "Ribera de Avellaneda",
-		"detalle": "Moderno paseo con espacios recreativos.",
+		"nombre": "Hito Punta Lara",
+		"localidad": "Punta Lara",
+		"descripcion": "Un punto de referencia en la costa, ideal para apreciar la inmensidad del río y el paisaje natural.",
+		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagenAlt": "Hito en Punta Lara",
 		"servicios": [
-			{ "nombreServicio": "WiFi", "tiene": true },
-			{ "nombreServicio": "Estacionamiento", "tiene": false },
-			{ "nombreServicio": "Pileta", "tiene": false },
-			{ "nombreServicio": "Buffet", "tiene": false }
-		]
+			{ "nombreServicio": "Área de descanso", "tiene": true },
+			{ "nombreServicio": "Vistas panorámicas", "tiene": true },
+			{ "nombreServicio": "Sendero peatonal", "tiene": true },
+			{ "nombreServicio": "Kiosco", "tiene": false },
+			{ "nombreServicio": "Estacionamiento", "tiene": true }
+		],
+		"latitud": -34.8500,
+ 		"longitud": -57.9600,
+		"contaminacionAgua": 12,
+		"contaminacionArena": 20
+	},
+	{
+		"id": "8",
+		"nombre": "Mesitas al Río",
+		"localidad": "Punta Lara",
+		"descripcion": "Un sector de la costa con mesas y bancos, perfecto para picnics y reuniones al aire libre junto al río.",
+		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagenAlt": "Mesas al Río en Punta Lara",
+		"servicios": [
+			{ "nombreServicio": "Mesas y bancos", "tiene": true },
+			{ "nombreServicio": "Áreas verdes", "tiene": true },
+			{ "nombreServicio": "Parrillas", "tiene": false },
+			{ "nombreServicio": "Baños públicos", "tiene": false },
+			{ "nombreServicio": "Estacionamiento", "tiene": true }
+		],
+		"latitud": -34.8550,
+ 		"longitud": -57.9500,
+		"contaminacionAgua": 13,
+		"contaminacionArena": 18
+	},
+	{
+		"id": "9",
+		"nombre": "Playa Palo Blanco",
+		"localidad": "Punta Indio",
+		"descripcion": "Una playa más rústica y natural, ideal para quienes buscan tranquilidad y un entorno menos concurrido.",
+		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagenAlt": "Playa Palo Blanco",
+		"servicios": [
+			{ "nombreServicio": "Área de playa", "tiene": true },
+			{ "nombreServicio": "Naturaleza", "tiene": true },
+			{ "nombreServicio": "Servicios básicos", "tiene": false },
+			{ "nombreServicio": "Kiosco", "tiene": false },
+			{ "nombreServicio": "Guardavidas", "tiene": false }
+		],
+		"latitud": -35.2600,
+ 		"longitud": -57.2500,
+		"contaminacionAgua": 12,
+		"contaminacionArena": 15
+	},
+	{
+		"id": "10",
+		"nombre": "Playa Punta Blanca",
+		"localidad": "Punta Indio",
+		"descripcion": "Una extensa playa virgen, perfecta para disfrutar de la serenidad del paisaje y la naturaleza costera.",
+		"imagen": "/images/balnearios/quilmes1.jpg",
+		"imagenAlt": "Playa Punta Blanca",
+		"servicios": [
+			{ "nombreServicio": "Área de playa", "tiene": true },
+			{ "nombreServicio": "Naturaleza", "tiene": true },
+			{ "nombreServicio": "Camping permitido", "tiene": false },
+			{ "nombreServicio": "Servicios turísticos", "tiene": false },
+			{ "nombreServicio": "Apto para pesca", "tiene": true }
+		],
+		"latitud": -35.3300,
+ 		"longitud": -57.2000,
+		"contaminacionAgua": 10,
+		"contaminacionArena": 13
+	},
+	{
+		"id": "11",
+		"nombre": "Atalaya Espigón",
+		"localidad": "Magdalena",
+		"descripcion": "Un espigón con vistas panorámicas al río, popular entre pescadores y para observar la vida silvestre.",
+		"imagen": "/images/balnearios/atalaya_espigon1.jpg",
+		"imagenAlt": "Espigón en Atalaya",
+		"servicios": [
+			{ "nombreServicio": "Pesca", "tiene": true },
+			{ "nombreServicio": "Mirador", "tiene": true },
+			{ "nombreServicio": "Baños", "tiene": false },
+			{ "nombreServicio": "Kiosco", "tiene": false },
+			{ "nombreServicio": "Acceso libre", "tiene": true }
+		],
+		"latitud": -35.0350,
+		"longitud": -57.3680,
+		"contaminacionAgua": 20,
+		"contaminacionArena": 25
+	},
+	{
+		"id": "12",
+		"nombre": "Playa Las Ruinas",
+		"localidad": "Magdalena",
+		"descripcion": "Una playa con encanto histórico, con los restos de antiguas construcciones que le dan un toque único.",
+		"imagen": "/images/balnearios/las_ruinas1.jpg",
+		"imagenAlt": "Playa Las Ruinas en Magdalena",
+		"servicios": [
+			{ "nombreServicio": "Área de playa", "tiene": true },
+			{ "nombreServicio": "Sitio histórico", "tiene": true },
+			{ "nombreServicio": "Caminatas", "tiene": true },
+			{ "nombreServicio": "Baños", "tiene": false },
+			{ "nombreServicio": "Kiosco", "tiene": false }
+		],
+		"latitud": -35.0500,
+		"longitud": -57.3500,
+		"contaminacionAgua": 27,
+		"contaminacionArena": 54
 	}
 ]
