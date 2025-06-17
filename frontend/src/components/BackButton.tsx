@@ -13,7 +13,7 @@ export const BackButton = ({ to, onBack }: BackButtonProps) => (
 		variant="ghost"
 		size="icon"
 		title="Volver"
-		aria-label="Volver"
+		aria-label="Volver a la selección"
 		className="mb-4 md:hidden"
 		onClick={() => onBack(to)}
 	>
