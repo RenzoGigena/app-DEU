@@ -13,195 +13,155 @@ import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Solicitud } from "@/types/balnearios"
+import { SolicitudCard } from "@/components/SolicitudCard"
 import { Textarea } from "@/components/ui/textarea"
+import type { User } from "@/helpers/AuthProvider"
+import solicitudesData from "@/app/mocks/solicitudes.json"
 import { toast } from "sonner"
 
-/* ─── Aux: auth helpers reutilizados ───────────────────────────────── */
-type Role = "admin" | "contributor"
-type User = { mail: string; role: Role; password?: string }
-
+/* --- tipos y mocks (sin cambios) --- */
 const LS_SESSION = "balneario-session"
 const getSession = (): User | null =>
 	JSON.parse(localStorage.getItem(LS_SESSION) || "null")
 
-/* ─── Tipos y datos de las solicitudes ────────────────────────────── */
-export type Solicitud = {
-	id: string
-	nombreBalneario: string
-	localidad: string
-	descripcion: string
-	servicios: string[]
-	telefono: string
-	url: string
-	contribuidor: string
-}
-
-const INITIAL_SOLICITUDES: Solicitud[] = [
-	{
-		id: "1",
-		nombreBalneario: "Balneario 12",
-		localidad: "Barisso",
-		descripcion: "Ubicación: Calle 9 #432.\nServicios: Baños, Parrilla.",
-		servicios: ["Baños", "Parrilla"],
-		telefono: "221 4924523",
-		url: "balneario12.com",
-		contribuidor: "PedroPascal@gmail.com",
-	},
-	{
-		id: "2",
-		nombreBalneario: "Ribera Sur",
-		localidad: "Avellaneda",
-		descripcion: "Amplio parque costero con fogones.",
-		servicios: ["Fogones", "Estacionamiento"],
-		telefono: "11 32165498",
-		url: "ribera.avellaneda.ar",
-		contribuidor: "ana.dev@correo.com",
-	},
-]
-
-/* ─── Page Component ──────────────────────────────────────────────── */
 export default function SolicitudesPage() {
 	const [session, setSession] = useState<User | null>(null)
 
-	/* estado de solicitudes y búsqueda */
 	const [solicitudes, setSolicitudes] = useState<Solicitud[]>(() => [
-		...INITIAL_SOLICITUDES,
+		...(solicitudesData as Solicitud[]),
 	])
 	const [search, setSearch] = useState("")
 
-	/* diálogo de rechazo */
+	/* diálogos */
+	const [approveId, setApproveId] = useState<string | null>(null)
 	const [rejectId, setRejectId] = useState<string | null>(null)
 	const [motivo, setMotivo] = useState("")
 
-	/* cargar sesión */
-	useEffect(() => {
-		setSession(getSession())
-	}, [])
+	/* live-region para lectores de pantalla */
+	const [liveMsg, setLiveMsg] = useState("")
+
+	useEffect(() => setSession(getSession()), [])
 
 	if (!session || session.role !== "admin") {
 		return (
-			<main className="flex flex-col items-center justify-center h-[70vh] gap-4 text-center">
+			<main
+				role="main"
+				className="flex flex-col items-center justify-center h-[70vh] gap-4 text-center"
+			>
 				<h2 className="text-2xl font-semibold text-primary">
 					Acceso restringido
 				</h2>
-				<p className="text-muted-foreground">
-					Esta sección sólo está disponible para administradores.
-				</p>
+				<p className="text-muted-foreground">Sólo administradores.</p>
 			</main>
 		)
 	}
 
-	/* ── handlers ──────────────────────────────────────────────────── */
-	const handleApprove = (id: string) => {
-		setSolicitudes((prev) => prev.filter((s) => s.id !== id))
-		toast.success("Solicitud aceptada con éxito ✅", {
+	/* ---------- acciones ---------- */
+	const doApprove = () => {
+		if (!approveId) return
+		setSolicitudes((p) => p.filter((s) => s.id !== approveId))
+		toast.success("Solicitud aceptada", {
 			description: "Se notificó al contribuidor por e-mail.",
 		})
+		setLiveMsg("Solicitud aceptada")
+		setApproveId(null)
 	}
 
-	const handleReject = () => {
+	const doReject = () => {
 		if (!rejectId) return
-		setSolicitudes((prev) => prev.filter((s) => s.id !== rejectId))
+		setSolicitudes((p) => p.filter((s) => s.id !== rejectId))
 		toast.error("Solicitud rechazada", {
 			description: "Motivo enviado al contribuidor.",
 		})
-		setMotivo("")
+		setLiveMsg("Solicitud rechazada")
 		setRejectId(null)
 	}
 
-	const filteredSolicitudes = solicitudes.filter((s) =>
+	const filtered = solicitudes.filter((s) =>
 		s.nombreBalneario.toLowerCase().includes(search.toLowerCase())
 	)
 
-	/* ── UI helper: card de solicitud ─────────────────────────────── */
-	const Card = (s: Solicitud) => (
-		<article
-			key={s.id}
-			className="border rounded-lg p-4 flex flex-col gap-3 md:flex-row md:items-start shadow-sm"
-			aria-labelledby={`solicitud-${s.id}`}
-		>
-			<div className="flex-1 space-y-1">
-				<h3 id={`solicitud-${s.id}`} className="font-semibold">
-					{s.nombreBalneario}
-				</h3>
-				<p className="text-sm text-muted-foreground">
-					Contribuidor: {s.contribuidor}
-				</p>
-				<p className="whitespace-pre-line text-sm">{s.descripcion}</p>
-				<p className="text-sm">
-					Teléfono: <a href={`tel:${s.telefono}`}>{s.telefono}</a>
-				</p>
-				<a
-					href={`https://${s.url}`}
-					target="_blank"
-					rel="noopener noreferrer"
-					className="text-sm underline text-primary"
-				>
-					{s.url}
-				</a>
-			</div>
-			<div className="flex flex-col gap-2 md:w-40">
-				<Button
-					variant="secondary"
-					aria-label="Aprobar solicitud"
-					onClick={() => handleApprove(s.id)}
-				>
-					Aprobar
-				</Button>
-				<Button
-					variant="destructive"
-					aria-label="Rechazar solicitud"
-					onClick={() => setRejectId(s.id)}
-				>
-					Rechazar por motivo
-				</Button>
-			</div>
-		</article>
-	)
-
 	return (
-		<main
-			role="main"
-			className="flex-1 mx-auto w-full max-w-7xl px-3 py-8 space-y-8"
-		>
-			<h1 className="text-3xl font-bold text-primary">
-				Gestión de solicitudes
-			</h1>
-			<p className="text-muted-foreground">
-				Esta sección está destinada a la aprobación o rechazo de balnearios
-				propuestos por contribuidores.
+		<main role="main" className="flex-1 max-w-7xl mx-auto px-3 py-8 space-y-8">
+			<header>
+				<h1 className="text-3xl font-bold text-primary">
+					Gestión de solicitudes
+				</h1>
+				<p className="text-muted-foreground">
+					Apruebe o rechace balnearios propuestos por contribuidores.
+				</p>
+			</header>
+
+			<p className="sr-only" aria-live="polite">
+				{liveMsg}
 			</p>
 
-			{/* Buscador */}
 			<Input
-				placeholder="Ingrese un nombre para filtrar búsqueda"
-				aria-label="Filtrar por balneario"
+				placeholder="Filtrar por nombre de balneario"
+				aria-label="Filtrar solicitudes"
 				value={search}
 				onChange={(e) => setSearch(e.target.value)}
 			/>
 
-			{/* Listado o vacío */}
-			<section className="space-y-4">
-				{filteredSolicitudes.length > 0 ? (
-					filteredSolicitudes.map(Card)
+			{/* listado */}
+			<section className="space-y-4" aria-label="Solicitudes pendientes">
+				{filtered.length ? (
+					filtered.map((s) => (
+						<SolicitudCard
+							key={s.id}
+							data={s}
+							onApproveRequest={setApproveId}
+							onRejectRequest={setRejectId}
+						/>
+					))
 				) : (
-					<p className="text-muted-foreground">
+					<p role="alert" className="text-muted-foreground">
 						No hay solicitudes pendientes.
 					</p>
 				)}
 			</section>
 
-			{/* Dialogo de rechazo */}
-			<Dialog open={!!rejectId} onOpenChange={() => setRejectId(null)}>
-				<DialogContent>
+			{/* diálogo aprobación */}
+			<Dialog open={!!approveId} onOpenChange={() => setApproveId(null)}>
+				<DialogContent showCloseButton={false}>
 					<DialogHeader>
-						<DialogTitle>¿Desea rechazar esta solicitud?</DialogTitle>
+						<DialogTitle>Confirmar aprobación</DialogTitle>
 						<DialogDescription>
-							Describa brevemente el motivo. Esta información se enviará al
-							contribuidor.
+							¿Está seguro de publicar este balneario?
 						</DialogDescription>
 					</DialogHeader>
+					<DialogFooter className="flex gap-3 pt-4">
+						<Button
+							variant="secondary"
+							className="focus-visible:ring-black focus-visible:ring-offset-2"
+							aria-label="Confirmar aprobación"
+							onClick={doApprove}
+						>
+							Aprobar
+						</Button>
+						<DialogTrigger asChild>
+							<Button
+								variant="outline"
+								aria-label="Cancelar aprobación"
+								className="focus-visible:ring-black focus-visible:ring-offset-2"
+							>
+								Cancelar
+							</Button>
+						</DialogTrigger>
+					</DialogFooter>
+				</DialogContent>
+			</Dialog>
 
+			{/* diálogo rechazo */}
+			<Dialog open={!!rejectId} onOpenChange={() => setRejectId(null)}>
+				<DialogContent showCloseButton={false}>
+					<DialogHeader>
+						<DialogTitle>Rechazar solicitud</DialogTitle>
+						<DialogDescription>
+							Escriba el motivo. Se enviará al contribuidor.
+						</DialogDescription>
+					</DialogHeader>
 					<Textarea
 						value={motivo}
 						onChange={(e) => setMotivo(e.target.value)}
@@ -209,17 +169,22 @@ export default function SolicitudesPage() {
 						aria-label="Motivo de rechazo"
 						className="min-h-[6rem]"
 					/>
-
 					<DialogFooter className="flex gap-3 pt-4">
 						<Button
 							variant="destructive"
 							aria-label="Confirmar rechazo"
-							onClick={handleReject}
+							onClick={doReject}
+							className="focus-visible:ring-black focus-visible:ring-offset-2"
+							disabled={!motivo.trim()}
 						>
 							Confirmar
 						</Button>
 						<DialogTrigger asChild>
-							<Button variant="outline" aria-label="Cancelar rechazo">
+							<Button
+								variant="outline"
+								aria-label="Cancelar rechazo"
+								className="focus-visible:ring-black focus-visible:ring-offset-2"
+							>
 								Cancelar
 							</Button>
 						</DialogTrigger>

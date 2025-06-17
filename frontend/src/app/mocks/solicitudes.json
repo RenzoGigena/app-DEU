@@ -1,0 +1,102 @@
+[
+	{
+		"id": "1",
+		"nombreBalneario": "Balneario Eos",
+		"localidad": "Soria",
+		"descripcion": "Ubicación: Callejón de Guiomar Diéguez 39.\nServicios: Baños, Camping.",
+		"servicios": ["Baños", "Camping"],
+		"telefono": "+34 987 578 508",
+		"url": "angel.com",
+		"contribuidor": "niloguillen@gmail.com"
+	},
+	{
+		"id": "2",
+		"nombreBalneario": "Balneario Fugit",
+		"localidad": "Murcia",
+		"descripcion": "Ubicación: Rambla Heraclio Burgos 8 Piso 5 .\nServicios: Sombrillas, Estacionamiento.",
+		"servicios": ["Sombrillas", "Estacionamiento"],
+		"telefono": "+34 747 71 87 81",
+		"url": "adan-vallejo.es",
+		"contribuidor": "duranluz@yahoo.com"
+	},
+	{
+		"id": "3",
+		"nombreBalneario": "Balneario Iure",
+		"localidad": "Castellón",
+		"descripcion": "Ubicación: Acceso Gerónimo Martorell 580.\nServicios: Comedor, Estacionamiento, Camping.",
+		"servicios": ["Comedor", "Estacionamiento", "Camping"],
+		"telefono": "+34 672 431 837",
+		"url": "suarez-agusti.es",
+		"contribuidor": "qgalindo@yahoo.com"
+	},
+	{
+		"id": "4",
+		"nombreBalneario": "Balneario Incidunt",
+		"localidad": "Soria",
+		"descripcion": "Ubicación: Plaza Ovidio Trujillo 717.\nServicios: Comedor, Guardavidas, Camping.",
+		"servicios": ["Comedor", "Guardavidas", "Camping"],
+		"telefono": "+34 717 443 162",
+		"url": "ferrera-prada.es",
+		"contribuidor": "encarnitafuertes@uriarte.es"
+	},
+	{
+		"id": "5",
+		"nombreBalneario": "Balneario Eius",
+		"localidad": "Albacete",
+		"descripcion": "Ubicación: Cuesta de Odalis Ochoa 7 Apt. 30 .\nServicios: Camping, Parrilla.",
+		"servicios": ["Camping", "Parrilla"],
+		"telefono": "+34 897 71 59 71",
+		"url": "folch.com",
+		"contribuidor": "carlacosta@hotmail.com"
+	},
+	{
+		"id": "6",
+		"nombreBalneario": "Balneario Vitae",
+		"localidad": "Almería",
+		"descripcion": "Ubicación: Avenida Aixa Crespo 122.\nServicios: Guardavidas, Sombrillas, Baños.",
+		"servicios": ["Guardavidas", "Sombrillas", "Baños"],
+		"telefono": "+34 654 131 645",
+		"url": "balneariovitae.es",
+		"contribuidor": "marcela.guirao@yahoo.com"
+	},
+	{
+		"id": "7",
+		"nombreBalneario": "Balneario Magna",
+		"localidad": "Valencia",
+		"descripcion": "Ubicación: Camino de Fructuoso Barnés 91.\nServicios: Fogones, Pileta, Comedor.",
+		"servicios": ["Fogones", "Pileta", "Comedor"],
+		"telefono": "+34 612 450 378",
+		"url": "balneariomagna.es",
+		"contribuidor": "roberto.salazar@correo.com"
+	},
+	{
+		"id": "8",
+		"nombreBalneario": "Balneario Solis",
+		"localidad": "Cádiz",
+		"descripcion": "Ubicación: Paseo de Huertas 45.\nServicios: Estacionamiento, Baños.",
+		"servicios": ["Estacionamiento", "Baños"],
+		"telefono": "+34 698 420 991",
+		"url": "solisbeach.com",
+		"contribuidor": "solis.beach@ejemplo.es"
+	},
+	{
+		"id": "9",
+		"nombreBalneario": "Balneario Clara",
+		"localidad": "Girona",
+		"descripcion": "Ubicación: Calle Roselló 210.\nServicios: Sombrillas, Alquiler de kayak, Guardavidas.",
+		"servicios": ["Sombrillas", "Alquiler de kayak", "Guardavidas"],
+		"telefono": "+34 611 378 284",
+		"url": "balnearioclara.org",
+		"contribuidor": "clara.ceballos@gmail.com"
+	},
+	{
+		"id": "10",
+		"nombreBalneario": "Balneario Nova",
+		"localidad": "Huelva",
+		"descripcion": "Ubicación: Sendero de Oria 17.\nServicios: Parrilla, Baños, Camping.",
+		"servicios": ["Parrilla", "Baños", "Camping"],
+		"telefono": "+34 699 483 157",
+		"url": "balnearionova.net",
+		"contribuidor": "nova.info@outlook.com"
+	}
+]

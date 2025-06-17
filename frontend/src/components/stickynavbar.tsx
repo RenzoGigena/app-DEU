@@ -21,7 +21,11 @@ export default function StickyNavbar() {
 		<header className="sticky top-0 z-50 w-full border-b bg-[var(--primary)] text-[var(--primary-foreground)] backdrop-blur-md py-1 shadow-sm">
 			<div className="container mx-auto flex items-center justify-between px-4">
 				{/* Logo */}
-				<Link href="/" className="text-2xl font-bold tracking-tight">
+				<Link
+					href="/"
+					className="text-2xl font-bold tracking-tight"
+					aria-label="Inicio"
+				>
 					Balnearios Río de la Plata
 				</Link>
 
@@ -68,6 +72,7 @@ export default function StickyNavbar() {
 							variant="ghost"
 							size="icon"
 							className="lg:hidden text-[var(--accent)] hover:text-[var(--accent)]"
+							aria-label="Abrir menú de navegación"
 						>
 							<Menu className="h-6 w-6" />
 						</Button>

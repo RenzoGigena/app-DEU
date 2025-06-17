@@ -31,16 +31,19 @@ export function LoginForm({
 			className="space-y-4 border rounded-lg p-6 shadow w-full max-w-md mx-auto"
 		>
 			{showBack && <BackButton to="select" onBack={onBack} />}
-			<h3 className="text-xl font-semibold text-primary mb-2">
+
+			{/* h2 para mantener jerarquía correcta */}
+			<h2 className="text-xl font-semibold text-primary mb-2">
 				Iniciar sesión
-			</h3>
+			</h2>
 
 			{errors.global && (
 				<div
 					role="alert"
 					className="flex items-center gap-2 text-red-600 text-sm"
 				>
-					<AlertCircle className="w-4 h-4" /> {errors.global}
+					<AlertCircle className="w-4 h-4" />
+					{errors.global}
 				</div>
 			)}
 
@@ -76,7 +79,13 @@ export function LoginForm({
 				</p>
 			)}
 
-			<Button className="w-full" onClick={onSubmit} aria-label="Entrar">
+			<Button
+				aria-label="Entrar"
+				onClick={onSubmit}
+				className="w-full bg-primary text-white hover:bg-primary/90
+                   focus-visible:ring-2 focus-visible:ring-offset-2
+                   focus-visible:ring-black"
+			>
 				Entrar
 			</Button>
 		</section>
