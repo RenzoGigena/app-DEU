@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Servicio {
+  id             String   @id @default(uuid())
+  nombreServicio String
+  tiene          Boolean
+  balnearioId    String
+  balneario      Balneario @relation(fields: [balnearioId], references: [id])
+}
+
+model Balneario {
+  id                  String     @id @default(uuid())
+  longitud            Float
+  latitud             Float
+  contaminacionArena  Float
+  contaminacionAgua   Float
+  nombre              String
+  localidad           String
+  descripcion         String
+  imagen              String
+  imagenAlt           String
+  servicios           Servicio[]
+}
+
+model Solicitud {
+  id              String   @id @default(uuid())
+  nombreBalneario String
+  localidad       String
+  descripcion     String
+  servicios       String[] // array de strings
+  telefono        String
+  url             String
+  contribuidor    String
+}
+
