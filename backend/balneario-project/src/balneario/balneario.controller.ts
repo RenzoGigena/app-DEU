@@ -21,7 +21,7 @@ export class BalnearioController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<Balneario> {
+  findOne(@Param('id') id: string): Promise<Balneario | null> {
     return this.service.findOne(id);
   }
 
@@ -34,7 +34,7 @@ export class BalnearioController {
   update(
     @Param('id') id: string,
     @Body() body: Partial<CreateBalnearioDto>,
-  ): Promise<Balneario> {
+  ): Promise<Balneario | null> {
     return this.service.update(id, body);
   }
 

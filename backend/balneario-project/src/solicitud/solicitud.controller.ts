@@ -18,7 +18,7 @@ export class SolicitudController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<Solicitud> {
+  findOne(@Param('id') id: string): Promise<Solicitud | null> {
     return this.service.findOne(id);
   }
 

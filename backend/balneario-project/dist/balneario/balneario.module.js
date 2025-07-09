@@ -7,16 +7,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BalnearioModule = void 0;
-const common_1 = require("@nestjs/common");
-const balneario_service_1 = require("./balneario.service");
 const balneario_controller_1 = require("./balneario.controller");
+const balneario_service_1 = require("./balneario.service");
+const common_1 = require("@nestjs/common");
 let BalnearioModule = class BalnearioModule {
 };
 exports.BalnearioModule = BalnearioModule;
 exports.BalnearioModule = BalnearioModule = __decorate([
     (0, common_1.Module)({
         providers: [balneario_service_1.BalnearioService],
-        controllers: [balneario_controller_1.BalnearioController]
+        controllers: [balneario_controller_1.BalnearioController],
     })
 ], BalnearioModule);
 //# sourceMappingURL=balneario.module.js.map

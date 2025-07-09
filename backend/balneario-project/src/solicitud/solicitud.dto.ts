@@ -1,4 +1,4 @@
-import { IsArray, IsNotEmpty, IsString, IsUrl } from 'class-validator';
+import { IsArray, IsString, IsUrl } from 'class-validator';
 
 export class CreateSolicitudDto {
   @IsString()

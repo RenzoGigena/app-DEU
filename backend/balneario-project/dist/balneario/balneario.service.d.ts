@@ -5,8 +5,8 @@ export declare class BalnearioService {
     private prisma;
     constructor(prisma: PrismaService);
     findAll(): Promise<Balneario[]>;
-    findOne(id: string): Promise<Balneario>;
+    findOne(id: string): Promise<Balneario | null>;
     create(data: CreateBalnearioDto): Promise<Balneario>;
-    update(id: string, data: Partial<CreateBalnearioDto>): Promise<Balneario>;
+    update(id: string, data: Partial<CreateBalnearioDto>): Promise<Balneario | null>;
     remove(id: string): Promise<Balneario>;
 }

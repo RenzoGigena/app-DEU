@@ -11,7 +11,7 @@ export class BalnearioService {
     return this.prisma.balneario.findMany({ include: { servicios: true } });
   }
 
-  async findOne(id: string): Promise<Balneario> {
+  async findOne(id: string): Promise<Balneario | null> {
     return this.prisma.balneario.findUnique({
       where: { id },
       include: { servicios: true },
@@ -33,15 +33,45 @@ export class BalnearioService {
   async update(
     id: string,
     data: Partial<CreateBalnearioDto>,
-  ): Promise<Balneario> {
-    return this.prisma.balneario.update({
+  ): Promise<Balneario | null> {
+    // Extraer servicios si vienen en la data
+    const { servicios, ...balnearioData } = data;
+
+    // Actualizar el balneario primero
+    await this.prisma.balneario.update({
       where: { id },
-      data,
+      data: balnearioData,
+    });
+
+    // Si se pasaron nuevos servicios, borramos los anteriores y creamos los nuevos
+    if (servicios) {
+      // Borrar todos los servicios del balneario
+      await this.prisma.servicio.deleteMany({
+        where: { balnearioId: id },
+      });
+
+      // Crear los nuevos servicios
+      for (const servicio of servicios) {
+        await this.prisma.servicio.create({
+          data: {
+            ...servicio,
+            balnearioId: id,
+          },
+        });
+      }
+    }
+
+    // Devolver el balneario actualizado con servicios incluidos
+    return this.prisma.balneario.findUnique({
+      where: { id },
       include: { servicios: true },
     });
   }
 
   async remove(id: string): Promise<Balneario> {
-    return this.prisma.balneario.delete({ where: { id } });
+    return this.prisma.balneario.delete({
+      where: { id },
+      include: { servicios: true },
+    });
   }
 }

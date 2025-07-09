@@ -38,14 +38,34 @@ let BalnearioService = class BalnearioService {
         });
     }
     async update(id, data) {
-        return this.prisma.balneario.update({
+        const { servicios, ...balnearioData } = data;
+        await this.prisma.balneario.update({
             where: { id },
-            data,
+            data: balnearioData,
+        });
+        if (servicios) {
+            await this.prisma.servicio.deleteMany({
+                where: { balnearioId: id },
+            });
+            for (const servicio of servicios) {
+                await this.prisma.servicio.create({
+                    data: {
+                        ...servicio,
+                        balnearioId: id,
+                    },
+                });
+            }
+        }
+        return this.prisma.balneario.findUnique({
+            where: { id },
             include: { servicios: true },
         });
     }
     async remove(id) {
-        return this.prisma.balneario.delete({ where: { id } });
+        return this.prisma.balneario.delete({
+            where: { id },
+            include: { servicios: true },
+        });
     }
 };
 exports.BalnearioService = BalnearioService;

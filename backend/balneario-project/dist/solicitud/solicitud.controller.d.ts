@@ -6,6 +6,6 @@ export declare class SolicitudController {
     constructor(service: SolicitudService);
     create(dto: CreateSolicitudDto): Promise<Solicitud>;
     findAll(): Promise<Solicitud[]>;
-    findOne(id: string): Promise<Solicitud>;
+    findOne(id: string): Promise<Solicitud | null>;
     remove(id: string): Promise<Solicitud>;
 }

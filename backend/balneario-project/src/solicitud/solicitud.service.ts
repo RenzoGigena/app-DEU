@@ -1,6 +1,6 @@
 // src/solicitud/solicitud.service.ts
 
-import { CreateSolicitudDto } from './create-solicitud.dto';
+import { CreateSolicitudDto } from './solicitud.dto';
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Solicitud } from '@prisma/client';
