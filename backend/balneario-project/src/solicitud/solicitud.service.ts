@@ -1,10 +1,12 @@
 // src/solicitud/solicitud.service.ts
 
+import { Balneario, Prisma } from '@prisma/client';
+
 import { CreateSolicitudDto } from './solicitud.dto';
 import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { Solicitud } from '@prisma/client';
+
 type ServicioFromJson = { nombreServicio: string; tiene: boolean };
 
 @Injectable()
@@ -15,7 +17,7 @@ export class SolicitudService {
     return this.prisma.solicitud.create({
       data: {
         ...data,
-        servicios: data.servicios as Prisma.InputJsonValue,
+        servicios: data.servicios as unknown as Prisma.JsonArray, // conversión explícita
       },
     });
   }
@@ -32,7 +34,7 @@ export class SolicitudService {
     return this.prisma.solicitud.delete({ where: { id } });
   }
 
-  async aprobar(id: string): Promise<any> {
+  async aprobar(id: string): Promise<Balneario> {
     const solicitud = await this.prisma.solicitud.findUnique({ where: { id } });
 
     if (!solicitud) throw new Error('Solicitud no encontrada');

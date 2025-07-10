@@ -1,8 +1,4 @@
-export interface Servicio {
-  nombreServicio: string;
-  tiene: boolean;
-}
-
+import { Servicio } from './servicio.interface';
 export interface Solicitud {
   id: string;
   nombreBalneario: string;

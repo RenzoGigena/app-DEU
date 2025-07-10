@@ -10,7 +10,7 @@ import {
 import { SolicitudService } from './solicitud.service';
 import { CreateSolicitudDto } from './solicitud.dto';
 import { Solicitud } from '../types/solicitud.interface';
-
+import { Servicio } from 'src/types/servicio.interface';
 @Controller('solicitudes')
 export class SolicitudController {
   constructor(private readonly service: SolicitudService) {}
@@ -24,7 +24,7 @@ export class SolicitudController {
   @Get()
   async findAll(): Promise<Solicitud[]> {
     const solicitudes = await this.service.findAll();
-    return solicitudes.map(this.ensureValidSolicitud);
+    return solicitudes.map((s) => this.ensureValidSolicitud(s)); // ✅ FIX: arrow function
   }
 
   @Get(':id')
@@ -50,9 +50,10 @@ export class SolicitudController {
     if (!Array.isArray(solicitud.servicios)) {
       throw new Error('Campo servicios inválido en la solicitud');
     }
+
     return {
       ...solicitud,
-      servicios: solicitud.servicios as any[], // si tenés definido el tipo `Servicio` podés ponerlo explícito
+      servicios: solicitud.servicios as Servicio[],
     };
   }
 }
