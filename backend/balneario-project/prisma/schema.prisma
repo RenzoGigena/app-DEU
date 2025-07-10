@@ -41,7 +41,7 @@ model Solicitud {
   nombreBalneario String
   localidad       String
   descripcion     String
-  servicios       String[] // array de strings
+  servicios       Json
   telefono        String
   url             String
   contribuidor    String

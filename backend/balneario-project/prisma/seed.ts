@@ -1,0 +1,286 @@
+// prisma/seed.ts
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+const balnearios = [
+  {
+    id: '1',
+    nombre: 'Costanera y Balneario Quilmes',
+    localidad: 'Quilmes',
+    descripcion: 'Playas amplias, actividades y más.',
+    imagen: '/images/balnearios/quilmes1.jpg',
+    imagenAlt: 'Balneario La Costa en Mar del Plata',
+    servicios: [
+      { nombreServicio: 'WiFi', tiene: false },
+      { nombreServicio: 'Estacionamiento', tiene: true },
+      { nombreServicio: 'Entrada accesible', tiene: true },
+      { nombreServicio: 'Pileta', tiene: false },
+      { nombreServicio: 'Buffet', tiene: false },
+      { nombreServicio: 'Kiosco', tiene: false },
+      { nombreServicio: 'Baños', tiene: false },
+      { nombreServicio: 'Alquiler de reposeras', tiene: false },
+      { nombreServicio: 'Guardavidas', tiene: false },
+      { nombreServicio: 'Permite mascotas', tiene: true },
+    ],
+    latitud: -34.711041,
+    longitud: -58.221209,
+    contaminacionAgua: 26,
+    contaminacionArena: 88,
+  },
+  {
+    id: '2',
+    nombre: 'Camping Recreo Berazategui',
+    localidad: 'Berazategui',
+    descripcion:
+      'Un espacio ideal para acampar y disfrutar de la naturaleza, con instalaciones básicas para toda la familia.',
+    imagen: '/images/balnearios/berazategui1.jpg',
+    imagenAlt: 'Camping Recreo Berazategui',
+    servicios: [
+      { nombreServicio: 'Zona de acampe', tiene: true },
+      { nombreServicio: 'Parrillas', tiene: true },
+      { nombreServicio: 'Baños', tiene: true },
+      { nombreServicio: 'Duchas', tiene: true },
+      { nombreServicio: 'Kiosco', tiene: true },
+      { nombreServicio: 'Electricidad', tiene: false },
+      { nombreServicio: 'Pileta', tiene: false },
+      { nombreServicio: 'Guardavidas', tiene: false },
+      { nombreServicio: 'Permite mascotas', tiene: true },
+    ],
+    latitud: -34.74555799564602,
+    longitud: -58.17530070168647,
+    contaminacionAgua: 12,
+    contaminacionArena: 26,
+  },
+  {
+    id: '3',
+    nombre: 'Costanera Hudson',
+    localidad: 'Hudson',
+    descripcion:
+      'Un paseo costero tranquilo con vistas al río, ideal para caminatas y pasar el día al aire libre.',
+    imagen: '/images/balnearios/hudson1.jpg',
+    imagenAlt: 'Costanera Hudson',
+    servicios: [
+      { nombreServicio: 'Estacionamiento', tiene: true },
+      { nombreServicio: 'Baños públicos', tiene: false },
+      { nombreServicio: 'Áreas verdes', tiene: true },
+      { nombreServicio: 'Zona de picnic', tiene: false },
+      { nombreServicio: 'Kiosco', tiene: false },
+      { nombreServicio: 'Alquiler de bicicletas', tiene: false },
+      { nombreServicio: 'Permite mascotas', tiene: true },
+    ],
+    latitud: -34.75327174257782,
+    longitud: -58.108053965101874,
+    contaminacionAgua: 38,
+    contaminacionArena: 61,
+  },
+  {
+    id: '4',
+    nombre: 'Camping la abuela Gladys',
+    localidad: 'Punta Lara',
+    descripcion:
+      'Camping familiar con acceso a la costa, perfecto para un escape de fin de semana.',
+    imagen: '/images/balnearios/puntaLara1.jpg',
+    imagenAlt: 'Camping Abuela Gladys en Punta Lara',
+    servicios: [
+      { nombreServicio: 'Zona de acampe', tiene: true },
+      { nombreServicio: 'Parrillas', tiene: true },
+      { nombreServicio: 'Baños', tiene: true },
+      { nombreServicio: 'Duchas', tiene: true },
+      { nombreServicio: 'Proveeduría', tiene: true },
+      { nombreServicio: 'Juegos infantiles', tiene: false },
+      { nombreServicio: 'Permite mascotas', tiene: false },
+    ],
+    latitud: -34.781469589274195,
+    longitud: -58.012971605428326,
+    contaminacionAgua: 15,
+    contaminacionArena: 23,
+  },
+  {
+    id: '5',
+    nombre: 'Muelle de Pesca Municipal',
+    localidad: 'Punta Lara',
+    descripcion:
+      'Un muelle popular para la pesca deportiva, con hermosas vistas del Río de la Plata al atardecer.',
+    imagen: '/images/balnearios/puntaLara2.jpg',
+    imagenAlt: 'Muelle de Pesca Municipal en Punta Lara',
+    servicios: [
+      { nombreServicio: 'Alquiler de equipos de pesca', tiene: false },
+      { nombreServicio: 'Baños', tiene: true },
+      { nombreServicio: 'Kiosco', tiene: true },
+      { nombreServicio: 'Iluminación nocturna', tiene: true },
+      { nombreServicio: 'Vigilancia', tiene: false },
+    ],
+    latitud: -34.781875339193945,
+    longitud: -58.008966904644225,
+    contaminacionAgua: 13,
+    contaminacionArena: 45,
+  },
+  {
+    id: '6',
+    nombre: 'Camping La Marcelita',
+    localidad: 'PuntaLara',
+    descripcion:
+      'Un camping acogedor con acceso directo a la playa, ideal para escapadas en contacto con la naturaleza.',
+    imagen: '/images/balnearios/puntaLara3.jpg',
+    imagenAlt: 'Camping La Marcelita',
+    servicios: [
+      { nombreServicio: 'Zona de acampe', tiene: true },
+      { nombreServicio: 'Parrillas', tiene: true },
+      { nombreServicio: 'Baños', tiene: true },
+      { nombreServicio: 'Duchas', tiene: true },
+      { nombreServicio: 'Proveeduría', tiene: false },
+      { nombreServicio: 'Acceso a la playa', tiene: true },
+      { nombreServicio: 'Permite mascotas', tiene: false },
+    ],
+    latitud: -34.788290998095576,
+    longitud: -58.0003421114448,
+    contaminacionAgua: 24,
+    contaminacionArena: 67,
+  },
+  {
+    id: '7',
+    nombre: 'Hito Punta Lara',
+    localidad: 'Punta Lara',
+    descripcion:
+      'Un punto de referencia en la costa, ideal para apreciar la inmensidad del río y el paisaje natural.',
+    imagen: '/images/balnearios/puntaLara4.jpg',
+    imagenAlt: 'Hito en Punta Lara',
+    servicios: [
+      { nombreServicio: 'Área de descanso', tiene: true },
+      { nombreServicio: 'Vistas panorámicas', tiene: true },
+      { nombreServicio: 'Sendero peatonal', tiene: true },
+      { nombreServicio: 'Kiosco', tiene: false },
+      { nombreServicio: 'Estacionamiento', tiene: true },
+    ],
+    latitud: -34.79701465215128,
+    longitud: -57.99178327944277,
+    contaminacionAgua: 12,
+    contaminacionArena: 20,
+  },
+  {
+    id: '8',
+    nombre: 'Mesitas al Río',
+    localidad: 'Punta Lara',
+    descripcion:
+      'Un sector de la costa con mesas y bancos, perfecto para picnics y reuniones al aire libre junto al río.',
+    imagen: '/images/balnearios/puntaLara5.jpg',
+    imagenAlt: 'Mesas al Río en Punta Lara',
+    servicios: [
+      { nombreServicio: 'Mesas y bancos', tiene: true },
+      { nombreServicio: 'Áreas verdes', tiene: true },
+      { nombreServicio: 'Parrillas', tiene: false },
+      { nombreServicio: 'Baños públicos', tiene: false },
+      { nombreServicio: 'Estacionamiento', tiene: true },
+    ],
+    latitud: -34.82824741867996,
+    longitud: -57.95495552803722,
+    contaminacionAgua: 13,
+    contaminacionArena: 18,
+  },
+  {
+    id: '9',
+    nombre: 'Playa Palo Blanco',
+    localidad: 'Los Naranjos',
+    descripcion:
+      'Una playa más rústica y natural, ideal para quienes buscan tranquilidad y un entorno menos concurrido.',
+    imagen: '/images/balnearios/losNaranjos1.jpg',
+    imagenAlt: 'Playa Palo Blanco',
+    servicios: [
+      { nombreServicio: 'Área de playa', tiene: true },
+      { nombreServicio: 'Naturaleza', tiene: true },
+      { nombreServicio: 'Servicios básicos', tiene: false },
+      { nombreServicio: 'Kiosco', tiene: false },
+      { nombreServicio: 'Guardavidas', tiene: false },
+    ],
+    latitud: -34.85587161867243,
+    longitud: -57.83820107425828,
+    contaminacionAgua: 12,
+    contaminacionArena: 15,
+  },
+  {
+    id: '10',
+    nombre: 'Playa Punta Blanca',
+    localidad: 'Los Naranjos',
+    descripcion:
+      'Una extensa playa virgen, perfecta para disfrutar de la serenidad del paisaje y la naturaleza costera.',
+    imagen: '/images/balnearios/losNaranjos2.jpg',
+    imagenAlt: 'Playa Punta Blanca',
+    servicios: [
+      { nombreServicio: 'Área de playa', tiene: true },
+      { nombreServicio: 'Naturaleza', tiene: true },
+      { nombreServicio: 'Camping permitido', tiene: false },
+      { nombreServicio: 'Servicios turísticos', tiene: false },
+      { nombreServicio: 'Apto para pesca', tiene: true },
+    ],
+    latitud: -34.9420527519152,
+    longitud: -57.66976908891426,
+    contaminacionAgua: 10,
+    contaminacionArena: 13,
+  },
+  {
+    id: '11',
+    nombre: 'Atalaya Espigón',
+    localidad: 'Magdalena',
+    descripcion:
+      'Un espigón con vistas panorámicas al río, popular entre pescadores y para observar la vida silvestre.',
+    imagen: '/images/balnearios/magdalena1.jpg',
+    imagenAlt: 'Espigón en Atalaya',
+    servicios: [
+      { nombreServicio: 'Pesca', tiene: true },
+      { nombreServicio: 'Mirador', tiene: true },
+      { nombreServicio: 'Baños', tiene: false },
+      { nombreServicio: 'Kiosco', tiene: false },
+      { nombreServicio: 'Acceso libre', tiene: true },
+    ],
+    latitud: -35.01333776435518,
+    longitud: -57.53554307740903,
+    contaminacionAgua: 20,
+    contaminacionArena: 25,
+  },
+  {
+    id: '12',
+    nombre: 'Playa Las Ruinas',
+    localidad: 'Punta Indio',
+    descripcion:
+      'Una playa con encanto histórico, con los restos de antiguas construcciones que le dan un toque único.',
+    imagen: '/images/balnearios/puntaIndio1.jpg',
+    imagenAlt: 'Playa Las Ruinas en Punta Indio',
+    servicios: [
+      { nombreServicio: 'Área de playa', tiene: true },
+      { nombreServicio: 'Sitio histórico', tiene: true },
+      { nombreServicio: 'Caminatas', tiene: true },
+      { nombreServicio: 'Baños', tiene: false },
+      { nombreServicio: 'Kiosco', tiene: false },
+    ],
+    latitud: -35.25121034156045,
+    longitud: -57.24785614839188,
+    contaminacionAgua: 27,
+    contaminacionArena: 54,
+  },
+];
+
+async function main() {
+  for (const balneario of balnearios) {
+    const { servicios, ...balnearioData } = balneario;
+
+    await prisma.balneario.create({
+      data: {
+        ...balnearioData,
+        servicios: {
+          create: servicios,
+        },
+      },
+    });
+  }
+  console.log('✅ Seed completado');
+}
+
+main()
+  .catch((e) => {
+    console.error('❌ Error en seed:', e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

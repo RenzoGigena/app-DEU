@@ -1,22 +1,3 @@
-export type Servicio = {
-	nombreServicio: string
-	tiene: boolean
-}
-
-export type Balneario = {
-    longitud: number
-    latitud: number
-    contaminacionArena: number
-    contaminacionAgua: number
-	id: string
-	nombre: string
-	localidad: string
-	descripcion: string
-	imagen: string
-	imagenAlt: string
-	servicios: Servicio[]
-}
-
 export type Solicitud = {
 	id: string
 	nombreBalneario: string
@@ -26,4 +7,24 @@ export type Solicitud = {
 	telefono: string
 	url: string
 	contribuidor: string
+}
+export interface Servicio {
+	id: string
+	nombreServicio: string
+	tiene: boolean
+	balnearioId: string
+}
+
+export interface Balneario {
+	id: string
+	longitud: number
+	latitud: number
+	contaminacionArena: number
+	contaminacionAgua: number
+	nombre: string
+	localidad: string
+	descripcion: string
+	imagen: string
+	imagenAlt: string
+	servicios: Servicio[]
 }

@@ -1,4 +1,20 @@
-import { IsArray, IsString, IsUrl } from 'class-validator';
+import {
+  IsArray,
+  IsBoolean,
+  IsString,
+  IsUrl,
+  ValidateNested,
+} from 'class-validator';
+
+import { Type } from 'class-transformer';
+
+class ServicioDto {
+  @IsString()
+  nombreServicio: string;
+
+  @IsBoolean()
+  tiene: boolean;
+}
 
 export class CreateSolicitudDto {
   @IsString()
@@ -11,8 +27,9 @@ export class CreateSolicitudDto {
   descripcion: string;
 
   @IsArray()
-  @IsString({ each: true })
-  servicios: string[];
+  @ValidateNested({ each: true })
+  @Type(() => ServicioDto)
+  servicios: ServicioDto[];
 
   @IsString()
   telefono: string;

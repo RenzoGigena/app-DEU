@@ -8,7 +8,15 @@ export class BalnearioService {
   constructor(private prisma: PrismaService) {}
 
   async findAll(): Promise<Balneario[]> {
-    return this.prisma.balneario.findMany({ include: { servicios: true } });
+    // Retorna todos los balnearios con sus servicios incluidos
+    // Si no hay balnearios, retorna un array vacío
+    const result = await this.prisma.balneario.findMany({
+      include: { servicios: true },
+    });
+    if (!result) {
+      return [];
+    }
+    return result;
   }
 
   async findOne(id: string): Promise<Balneario | null> {

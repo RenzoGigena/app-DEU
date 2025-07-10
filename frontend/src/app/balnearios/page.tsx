@@ -1,19 +1,60 @@
 "use client"
 
+import { useEffect, useState } from "react"
+
 import { Balneario } from "@/types/balnearios"
+import { BalnearioService } from "@/service/balnearioService"
 import Link from "next/link"
-import balnearios from "@/mocks/balnearios.json"
-import { useState } from "react"
+import SolicitudModal from "@/components/SolicitudModal"
+import { useAuth } from "@/helpers/AuthProvider"
 
 type Filtro = "nombre" | "localidad"
 
 export default function BalneariosPage() {
 	const [filterBy, setFilterBy] = useState<Filtro>("nombre")
 	const [searchTerm, setSearchTerm] = useState("")
+	const [balnearios, setBalnearios] = useState<Balneario[]>([])
+	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState<string | null>(null)
+	const [showModal, setShowModal] = useState(false)
+	const { user } = useAuth()
 
-	const filteredBalnearios = balnearios.filter((b: Balneario) =>
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const data = await BalnearioService.findAll()
+				setBalnearios(data)
+			} catch (err) {
+				setError("Error al cargar los balnearios.")
+				console.error(err)
+			} finally {
+				setLoading(false)
+			}
+		}
+
+		fetchData()
+	}, [])
+
+	const filteredBalnearios = balnearios.filter((b) =>
 		b[filterBy].toLowerCase().includes(searchTerm.toLowerCase())
 	)
+
+	// Mientras carga
+	if (loading) {
+		return (
+			<main className="text-center pt-20">
+				<p className="text-gray-500">Cargando balnearios...</p>
+			</main>
+		)
+	}
+
+	if (error) {
+		return (
+			<main className="text-center pt-20">
+				<p className="text-red-500">{error}</p>
+			</main>
+		)
+	}
 
 	return (
 		<main
@@ -68,6 +109,22 @@ export default function BalneariosPage() {
 						<option value="localidad">Localidad</option>
 					</select>
 				</form>
+				{(user?.role === "admin" || user?.role == "contributor") && (
+					<div>
+						<button
+							onClick={() => setShowModal(true)}
+							className="mb-4 px-4 py-2 bg-green-600 text-white rounded"
+						>
+							Crear nueva solicitud
+						</button>
+
+						{showModal && (
+							<SolicitudModal onClose={() => setShowModal(false)} />
+						)}
+
+						{/* Acá va el resto de tu componente */}
+					</div>
+				)}
 
 				{/* Tarjetas */}
 				<section
