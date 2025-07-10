@@ -13,42 +13,35 @@ import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Solicitud } from "@/types/balnearios"
+import { Solicitud } from "@/types/solicitudes"
 import { SolicitudCard } from "@/components/SolicitudCard"
+import { SolicitudService } from "@/service/solicitudService"
 import { Textarea } from "@/components/ui/textarea"
 import type { User } from "@/helpers/AuthProvider"
-import solicitudesData from "@/mocks/solicitudes.json"
 import { toast } from "sonner"
 
-/* --- tipos y mocks (sin cambios) --- */
 const LS_SESSION = "balneario-session"
 const getSession = (): User | null =>
 	JSON.parse(localStorage.getItem(LS_SESSION) || "null")
 
 export default function SolicitudesPage() {
 	const [session, setSession] = useState<User | null>(null)
-
-	const [solicitudes, setSolicitudes] = useState<Solicitud[]>(() => [
-		...(solicitudesData as Solicitud[]),
-	])
+	const [solicitudes, setSolicitudes] = useState<Solicitud[]>([])
 	const [search, setSearch] = useState("")
 
-	/* diálogos */
 	const [approveId, setApproveId] = useState<string | null>(null)
 	const [rejectId, setRejectId] = useState<string | null>(null)
 	const [motivo, setMotivo] = useState("")
-
-	/* live-region para lectores de pantalla */
 	const [liveMsg, setLiveMsg] = useState("")
 
-	useEffect(() => setSession(getSession()), [])
+	useEffect(() => {
+		setSession(getSession())
+		SolicitudService.findAll().then(setSolicitudes).catch(console.error)
+	}, [])
 
 	if (!session || session.role !== "admin") {
 		return (
-			<main
-				role="main"
-				className="flex flex-col items-center justify-center h-[70vh] gap-4 text-center"
-			>
+			<main className="flex flex-col items-center justify-center h-[70vh] gap-4 text-center">
 				<h2 className="text-2xl font-semibold text-primary">
 					Acceso restringido
 				</h2>
@@ -57,25 +50,31 @@ export default function SolicitudesPage() {
 		)
 	}
 
-	/* ---------- acciones ---------- */
-	const doApprove = () => {
+	const doApprove = async () => {
 		if (!approveId) return
-		setSolicitudes((p) => p.filter((s) => s.id !== approveId))
-		toast.success("Solicitud aceptada", {
-			description: "Se notificó al contribuidor por e-mail.",
-		})
-		setLiveMsg("Solicitud aceptada")
-		setApproveId(null)
+		try {
+			await SolicitudService.aprobar(approveId)
+			setSolicitudes((prev) => prev.filter((s) => s.id !== approveId))
+			toast.success("Solicitud aceptada", {
+				description: "Se notificó al contribuidor por e-mail.",
+			})
+			setLiveMsg("Solicitud aceptada")
+		} catch (e) {
+			toast.error("Error al aprobar solicitud")
+		} finally {
+			setApproveId(null)
+		}
 	}
 
 	const doReject = () => {
 		if (!rejectId) return
-		setSolicitudes((p) => p.filter((s) => s.id !== rejectId))
+		setSolicitudes((prev) => prev.filter((s) => s.id !== rejectId))
 		toast.error("Solicitud rechazada", {
 			description: "Motivo enviado al contribuidor.",
 		})
 		setLiveMsg("Solicitud rechazada")
 		setRejectId(null)
+		setMotivo("")
 	}
 
 	const filtered = solicitudes.filter((s) =>
@@ -83,7 +82,7 @@ export default function SolicitudesPage() {
 	)
 
 	return (
-		<main role="main" className="flex-1 max-w-7xl mx-auto px-3 py-8 space-y-8">
+		<main className="flex-1 max-w-7xl mx-auto px-3 py-8 space-y-8">
 			<header>
 				<h1 className="text-3xl font-bold text-primary">
 					Gestión de solicitudes
@@ -104,7 +103,6 @@ export default function SolicitudesPage() {
 				onChange={(e) => setSearch(e.target.value)}
 			/>
 
-			{/* listado */}
 			<section className="space-y-4" aria-label="Solicitudes pendientes">
 				{filtered.length ? (
 					filtered.map((s) => (
@@ -122,7 +120,6 @@ export default function SolicitudesPage() {
 				)}
 			</section>
 
-			{/* diálogo aprobación */}
 			<Dialog open={!!approveId} onOpenChange={() => setApproveId(null)}>
 				<DialogContent showCloseButton={false}>
 					<DialogHeader>
@@ -134,26 +131,18 @@ export default function SolicitudesPage() {
 					<DialogFooter className="flex gap-3 pt-4">
 						<Button
 							variant="secondary"
-							className="focus-visible:ring-black focus-visible:ring-offset-2 bg-green-600 hover:bg-green-700"
-							aria-label="Confirmar aprobación"
+							className="bg-green-600 hover:bg-green-700"
 							onClick={doApprove}
 						>
 							Aprobar
 						</Button>
 						<DialogTrigger asChild>
-							<Button
-								variant="outline"
-								aria-label="Cancelar aprobación"
-								className="focus-visible:ring-black focus-visible:ring-offset-2"
-							>
-								Cancelar
-							</Button>
+							<Button variant="outline">Cancelar</Button>
 						</DialogTrigger>
 					</DialogFooter>
 				</DialogContent>
 			</Dialog>
 
-			{/* diálogo rechazo */}
 			<Dialog open={!!rejectId} onOpenChange={() => setRejectId(null)}>
 				<DialogContent showCloseButton={false}>
 					<DialogHeader>
@@ -172,21 +161,13 @@ export default function SolicitudesPage() {
 					<DialogFooter className="flex gap-3 pt-4">
 						<Button
 							variant="destructive"
-							aria-label="Confirmar rechazo"
 							onClick={doReject}
-							className="focus-visible:ring-black focus-visible:ring-offset-2"
 							disabled={!motivo.trim()}
 						>
 							Confirmar
 						</Button>
 						<DialogTrigger asChild>
-							<Button
-								variant="outline"
-								aria-label="Cancelar rechazo"
-								className="focus-visible:ring-black focus-visible:ring-offset-2"
-							>
-								Cancelar
-							</Button>
+							<Button variant="outline">Cancelar</Button>
 						</DialogTrigger>
 					</DialogFooter>
 				</DialogContent>

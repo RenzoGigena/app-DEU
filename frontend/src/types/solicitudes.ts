@@ -15,3 +15,13 @@ export interface Solicitud {
 	url: string
 	contribuidor: string
 }
+
+export interface CreateSolicitudDto {
+	nombreBalneario: string
+	localidad: string
+	descripcion: string
+	servicios: Servicio[] // 👈 igual que en la interfaz
+	telefono: string
+	url: string
+	contribuidor: string
+}

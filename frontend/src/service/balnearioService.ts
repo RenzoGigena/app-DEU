@@ -1,7 +1,7 @@
 // services/balneario.service.ts
 
 import { Balneario } from "@/types/balnearios"
-import { CreateBalnearioDto } from "@/types/balnearios-dto"
+import { CreateBalnearioDto } from "@/types/balnearios"
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL
 

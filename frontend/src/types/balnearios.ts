@@ -1,13 +1,3 @@
-export type Solicitud = {
-	id: string
-	nombreBalneario: string
-	localidad: string
-	descripcion: string
-	servicios: string[]
-	telefono: string
-	url: string
-	contribuidor: string
-}
 export interface Servicio {
 	id: string
 	nombreServicio: string
@@ -27,4 +17,21 @@ export interface Balneario {
 	imagen: string
 	imagenAlt: string
 	servicios: Servicio[]
+}
+export interface ServicioDto {
+	nombreServicio: string
+	tiene: boolean
+}
+
+export interface CreateBalnearioDto {
+	longitud: number
+	latitud: number
+	contaminacionArena: number
+	contaminacionAgua: number
+	nombre: string
+	localidad: string
+	descripcion: string
+	imagen: string
+	imagenAlt: string
+	servicios: ServicioDto[]
 }
