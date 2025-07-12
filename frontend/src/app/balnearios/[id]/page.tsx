@@ -20,6 +20,7 @@ export default async function BalnearioDetail({
 	}
 
 	if (!balneario) return notFound()
+
 	const getContaminationLevel = (value: number) => {
 		if (value >= 70) return "Alto"
 		if (value >= 40) return "Medio"
@@ -49,7 +50,7 @@ export default async function BalnearioDetail({
 					className="rounded-md"
 				/>
 
-				<p>{balneario.descripcion}</p>
+				<p className="text-justify">{balneario.descripcion}</p>
 
 				{/* Servicios */}
 				<section aria-labelledby="servicios-title">
@@ -57,9 +58,9 @@ export default async function BalnearioDetail({
 						Servicios
 					</h2>
 
-					<ul className="space-y-2" role="list">
+					<ul className="space-y-2 text-left mt-2" role="list">
 						{balneario.servicios.map((servicio, index) => {
-							const disponible = servicio.tiene ? "disponible" : "no disponible"
+							const disponible = servicio.tiene ? "Disponible" : "No disponible"
 							return (
 								<li
 									key={index}
@@ -73,10 +74,7 @@ export default async function BalnearioDetail({
 										}`}
 									/>
 									<span>
-										<span className="font-medium">
-											{servicio.nombreServicio}
-										</span>
-										: <span>{disponible}</span>
+										<strong>{servicio.nombreServicio}</strong>: {disponible}
 									</span>
 								</li>
 							)
@@ -126,8 +124,8 @@ export default async function BalnearioDetail({
 							</span>
 						</p>
 						<p className="text-sm text-gray-500 mt-2">
-							* Los índices de contaminación se muestran en una escala de 0 a
-							100, donde 0 es muy bajo y 100 es muy alto.
+							* Índices expresados del 0 al 100. Valores mayores indican mayor
+							nivel de contaminación.
 						</p>
 					</div>
 				</section>

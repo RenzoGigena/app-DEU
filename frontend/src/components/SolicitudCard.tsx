@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import type { Solicitud } from "@/types/balnearios"
+import type { Solicitud } from "@/types/solicitudes"
 
 interface Props {
 	data: Solicitud
@@ -29,7 +29,15 @@ export function SolicitudCard({
 					Contribuidor: {s.contribuidor}
 				</p>
 				<p className="whitespace-pre-line text-sm">{s.descripcion}</p>
-				<p className="text-sm">Servicios: {s.servicios.join(" ")}</p>
+				<p className="text-sm">
+					Servicios:{" "}
+					{s.servicios
+						.filter((s) => s.tiene)
+						.map((m) => {
+							return m.nombreServicio
+						})
+						.join(" ")}
+				</p>
 				<p className="text-sm">
 					Teléfono:{" "}
 					<a

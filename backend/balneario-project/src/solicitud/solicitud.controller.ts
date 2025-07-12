@@ -24,7 +24,7 @@ export class SolicitudController {
   @Get()
   async findAll(): Promise<Solicitud[]> {
     const solicitudes = await this.service.findAll();
-    return solicitudes.map((s) => this.ensureValidSolicitud(s)); // ✅ FIX: arrow function
+    return solicitudes.map((s) => this.ensureValidSolicitud(s));
   }
 
   @Get(':id')

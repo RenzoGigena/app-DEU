@@ -1,6 +1,9 @@
 import {
   IsArray,
   IsBoolean,
+  IsLatitude,
+  IsLongitude,
+  IsNumber,
   IsString,
   IsUrl,
   ValidateNested,
@@ -39,4 +42,22 @@ export class CreateSolicitudDto {
 
   @IsString()
   contribuidor: string;
+
+  @IsLongitude()
+  longitud: number;
+
+  @IsLatitude()
+  latitud: number;
+
+  @IsNumber()
+  contaminacionArena: number;
+
+  @IsNumber()
+  contaminacionAgua: number;
+
+  @IsString()
+  imagen: string;
+
+  @IsString()
+  imagenAlt: string;
 }

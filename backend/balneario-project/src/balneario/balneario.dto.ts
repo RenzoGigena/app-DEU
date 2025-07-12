@@ -6,6 +6,7 @@ import {
   IsNotEmpty,
   IsNumber,
   IsString,
+  IsUrl,
   ValidateNested,
 } from 'class-validator';
 
@@ -47,6 +48,12 @@ export class CreateBalnearioDto {
 
   @IsString()
   imagenAlt: string;
+
+  @IsString()
+  telefono: string;
+
+  @IsUrl()
+  url: string;
 
   @IsArray()
   @ValidateNested({ each: true })

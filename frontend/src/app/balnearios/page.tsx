@@ -39,7 +39,6 @@ export default function BalneariosPage() {
 		b[filterBy].toLowerCase().includes(searchTerm.toLowerCase())
 	)
 
-	// Mientras carga
 	if (loading) {
 		return (
 			<main className="text-center pt-20">
@@ -70,7 +69,7 @@ export default function BalneariosPage() {
 					className="text-muted-foreground max-w-md mx-auto"
 					id="intro-description"
 				>
-					Aquí encontrarás una lista de balnearios disponibles en la rivera sur
+					Aquí encontrarás una lista de balnearios disponibles en la ribera sur
 					del Río de La Plata. Puedes buscar por nombre o localidad.
 				</p>
 			</header>
@@ -82,9 +81,6 @@ export default function BalneariosPage() {
 					aria-label="Buscador de balnearios"
 					className="pt-6 w-full max-w-4xl mx-auto flex flex-col sm:flex-row items-center gap-4 px-4"
 				>
-					<label htmlFor="search" className="sr-only">
-						Buscar balneario
-					</label>
 					<input
 						id="search"
 						type="text"
@@ -95,9 +91,6 @@ export default function BalneariosPage() {
 						aria-label={`Buscar por ${filterBy}`}
 					/>
 
-					<label htmlFor="filterBy" className="sr-only">
-						Buscar por nombre o localidad
-					</label>
 					<select
 						id="filterBy"
 						value={filterBy}
@@ -109,7 +102,8 @@ export default function BalneariosPage() {
 						<option value="localidad">Localidad</option>
 					</select>
 				</form>
-				{(user?.role === "admin" || user?.role == "contributor") && (
+
+				{(user?.role === "admin" || user?.role === "contributor") && (
 					<div>
 						<button
 							onClick={() => setShowModal(true)}
@@ -121,12 +115,10 @@ export default function BalneariosPage() {
 						{showModal && (
 							<SolicitudModal onClose={() => setShowModal(false)} />
 						)}
-
-						{/* Acá va el resto de tu componente */}
 					</div>
 				)}
 
-				{/* Tarjetas */}
+				{/* Tarjetas de balnearios */}
 				<section
 					className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4"
 					role="list"
@@ -135,7 +127,7 @@ export default function BalneariosPage() {
 					{filteredBalnearios.length > 0 ? (
 						filteredBalnearios.map((balneario: Balneario) => (
 							<article
-								key={balneario.nombre}
+								key={balneario.id}
 								className="w-full h-full border rounded-md p-4 shadow-md bg-white"
 								role="listitem"
 								aria-labelledby={`balneario-${balneario.id}-nombre`}
@@ -147,7 +139,10 @@ export default function BalneariosPage() {
 									{balneario.nombre}
 								</h3>
 								<p className="text-gray-600">{balneario.localidad}</p>
-								<p className="mt-2">{balneario.descripcion}</p>
+								<p className="mt-2 text-sm text-gray-800">
+									{balneario.descripcion}
+								</p>
+
 								<Link
 									href={`/balnearios/${balneario.id}`}
 									className="inline-block mt-3 text-blue-600 underline hover:text-blue-800"

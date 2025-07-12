@@ -1,5 +1,3 @@
-// src/solicitud/solicitud.service.ts
-
 import { Balneario, Prisma } from '@prisma/client';
 
 import { CreateSolicitudDto } from './solicitud.dto';
@@ -17,7 +15,7 @@ export class SolicitudService {
     return this.prisma.solicitud.create({
       data: {
         ...data,
-        servicios: data.servicios as unknown as Prisma.JsonArray, // conversión explícita
+        servicios: data.servicios as unknown as Prisma.JsonArray,
       },
     });
   }
@@ -44,12 +42,14 @@ export class SolicitudService {
         nombre: solicitud.nombreBalneario,
         localidad: solicitud.localidad,
         descripcion: solicitud.descripcion,
-        imagen: '/images/default.jpg', // o desde la solicitud si lo incluís
-        imagenAlt: `Imagen de ${solicitud.nombreBalneario}`,
-        latitud: 0, // deberías agregar estos datos al DTO si querés
-        longitud: 0,
-        contaminacionAgua: 0,
-        contaminacionArena: 0,
+        imagen: solicitud.imagen,
+        imagenAlt: solicitud.imagenAlt,
+        latitud: solicitud.latitud,
+        longitud: solicitud.longitud,
+        contaminacionAgua: solicitud.contaminacionAgua,
+        contaminacionArena: solicitud.contaminacionArena,
+        telefono: solicitud.telefono,
+        url: solicitud.url,
         servicios: {
           create: (solicitud.servicios as ServicioFromJson[]).map((s) => ({
             nombreServicio: s.nombreServicio,
@@ -60,7 +60,6 @@ export class SolicitudService {
       include: { servicios: true },
     });
 
-    // ❌ Opcional: eliminar la solicitud una vez aprobada
     await this.prisma.solicitud.delete({ where: { id } });
 
     return nuevoBalneario;

@@ -60,21 +60,29 @@ export default function SolicitudesPage() {
 			})
 			setLiveMsg("Solicitud aceptada")
 		} catch (e) {
+			console.error("Error al aprobar solicitud:", e)
 			toast.error("Error al aprobar solicitud")
 		} finally {
 			setApproveId(null)
 		}
 	}
 
-	const doReject = () => {
+	const doReject = async () => {
 		if (!rejectId) return
-		setSolicitudes((prev) => prev.filter((s) => s.id !== rejectId))
-		toast.error("Solicitud rechazada", {
-			description: "Motivo enviado al contribuidor.",
-		})
-		setLiveMsg("Solicitud rechazada")
-		setRejectId(null)
-		setMotivo("")
+		try {
+			await SolicitudService.remove(rejectId)
+			setSolicitudes((prev) => prev.filter((s) => s.id !== rejectId))
+			toast.error("Solicitud rechazada", {
+				description: "Motivo enviado al contribuidor.",
+			})
+			setLiveMsg("Solicitud rechazada")
+		} catch (e) {
+			console.error("Error al rechazar la solicitud:", e)
+			toast.error("Error al rechazar la solicitud")
+		} finally {
+			setRejectId(null)
+			setMotivo("")
+		}
 	}
 
 	const filtered = solicitudes.filter((s) =>

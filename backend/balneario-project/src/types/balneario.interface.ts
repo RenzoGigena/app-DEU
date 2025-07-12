@@ -11,5 +11,7 @@ export interface Balneario {
   descripcion: string;
   imagen: string;
   imagenAlt: string;
+  telefono: string;
+  url: string;
   servicios: Servicio[];
 }

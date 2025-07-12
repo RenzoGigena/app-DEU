@@ -33,6 +33,8 @@ model Balneario {
   descripcion         String
   imagen              String
   imagenAlt           String
+  telefono           String
+  url                String
   servicios           Servicio[]
 }
 
@@ -45,5 +47,11 @@ model Solicitud {
   telefono        String
   url             String
   contribuidor    String
+  longitud           Float
+  latitud            Float
+  contaminacionArena Float
+  contaminacionAgua  Float
+  imagen             String
+  imagenAlt          String
 }
 

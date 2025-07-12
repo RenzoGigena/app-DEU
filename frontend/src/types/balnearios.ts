@@ -4,7 +4,6 @@ export interface Servicio {
 	tiene: boolean
 	balnearioId: string
 }
-
 export interface Balneario {
 	id: string
 	longitud: number
@@ -16,8 +15,11 @@ export interface Balneario {
 	descripcion: string
 	imagen: string
 	imagenAlt: string
+	telefono: string
+	url: string
 	servicios: Servicio[]
 }
+
 export interface ServicioDto {
 	nombreServicio: string
 	tiene: boolean
@@ -33,5 +35,7 @@ export interface CreateBalnearioDto {
 	descripcion: string
 	imagen: string
 	imagenAlt: string
+	telefono: string
+	url: string
 	servicios: ServicioDto[]
 }
