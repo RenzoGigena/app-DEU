@@ -16,6 +16,14 @@ const nextConfig = {
 		}
 		return config
 	},
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "imgs.search.brave.com",
+			},
+		],
+	},
 }
 
 export default withPWA({

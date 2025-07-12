@@ -100,9 +100,23 @@ export default function SolicitudModal({ onClose }: SolicitudModalProps) {
 		if (isNaN(formData.latitud) || isNaN(formData.longitud))
 			newErrors.latlong = "Latitud y longitud deben ser válidos."
 
-		if (isNaN(formData.contaminacionAgua) || isNaN(formData.contaminacionArena))
-			newErrors.contaminacion = "Valores de contaminación inválidos."
+		if (
+			isNaN(formData.contaminacionAgua) ||
+			formData.contaminacionAgua < 0 ||
+			formData.contaminacionAgua > 100
+		) {
+			newErrors.contaminacionAgua =
+				"La contaminación del agua debe estar entre 0 y 100."
+		}
 
+		if (
+			isNaN(formData.contaminacionArena) ||
+			formData.contaminacionArena < 0 ||
+			formData.contaminacionArena > 100
+		) {
+			newErrors.contaminacionArena =
+				"La contaminación de la arena debe estar entre 0 y 100."
+		}
 		setErrors(newErrors)
 		return Object.keys(newErrors).length === 0
 	}

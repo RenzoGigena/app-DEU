@@ -9,7 +9,7 @@ export default async function BalnearioDetail({
 }: {
 	params: { id: string }
 }) {
-	const { id } = params
+	const { id } = await params
 
 	let balneario: Balneario | null = null
 	try {
