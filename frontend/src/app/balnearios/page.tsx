@@ -128,28 +128,34 @@ export default function BalneariosPage() {
 						filteredBalnearios.map((balneario: Balneario) => (
 							<article
 								key={balneario.id}
-								className="w-full h-full border rounded-md p-4 shadow-md bg-white"
+								className="w-full h-full rounded-2xl border border-gray-200 bg-white shadow-md hover:shadow-lg transition-shadow p-6 flex flex-col justify-between"
 								role="listitem"
 								aria-labelledby={`balneario-${balneario.id}-nombre`}
 							>
-								<h3
-									id={`balneario-${balneario.id}-nombre`}
-									className="text-xl font-bold"
-								>
-									{balneario.nombre}
-								</h3>
-								<p className="text-gray-600">{balneario.localidad}</p>
-								<p className="mt-2 text-sm text-gray-800">
-									{balneario.descripcion}
-								</p>
+								<div>
+									<h3
+										id={`balneario-${balneario.id}-nombre`}
+										className="text-2xl font-semibold text-primary mb-1"
+									>
+										{balneario.nombre}
+									</h3>
+									<p className="text-sm text-muted-foreground font-medium mb-2">
+										{balneario.localidad}
+									</p>
+									<p className="text-gray-700 text-sm leading-relaxed line-clamp-4">
+										{balneario.descripcion}
+									</p>
+								</div>
 
-								<Link
-									href={`/balnearios/${balneario.id}`}
-									className="inline-block mt-3 text-blue-600 underline hover:text-blue-800"
-									aria-label={`Ver más sobre ${balneario.nombre}`}
-								>
-									Ver más
-								</Link>
+								<div className="mt-4">
+									<Link
+										href={`/balnearios/${balneario.id}`}
+										className="inline-block rounded-lg bg-primary hover:bg-blue-900 text-white text-sm font-medium px-4 py-2 transition-colors shadow-sm"
+										aria-label={`Ver más sobre ${balneario.nombre}`}
+									>
+										Ver más
+									</Link>
+								</div>
 							</article>
 						))
 					) : (

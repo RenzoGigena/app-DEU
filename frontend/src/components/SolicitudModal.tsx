@@ -1,9 +1,11 @@
 "use client"
 
+import { useRef, useState } from "react"
+
 import { CreateSolicitudDto } from "@/types/solicitudes"
 import { SolicitudService } from "@/service/solicitudService"
 import { toast } from "sonner"
-import { useState } from "react"
+import { useFocusTrap } from "@/hooks/useFocusTrap"
 
 interface SolicitudModalProps {
 	onClose: () => void
@@ -38,6 +40,8 @@ export default function SolicitudModal({ onClose }: SolicitudModalProps) {
 			tiene: false,
 		})),
 	})
+	const modalRef = useRef<HTMLDivElement>(null)
+	useFocusTrap(modalRef)
 
 	const [errors, setErrors] = useState<Record<string, string>>({})
 	const [loading, setLoading] = useState(false)
@@ -149,6 +153,7 @@ export default function SolicitudModal({ onClose }: SolicitudModalProps) {
 			<div
 				className="mt-20 w-full max-w-3xl px-4"
 				onClick={(e) => e.stopPropagation()}
+				ref={modalRef}
 			>
 				<form
 					onSubmit={handleSubmit}
