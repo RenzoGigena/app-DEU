@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 
 import { Balneario } from "@/types/balnearios"
+import { BalnearioCard } from "@/components/BalnearioCard"
 import { BalnearioService } from "@/service/balnearioService"
 import Link from "next/link"
 import SolicitudModal from "@/components/SolicitudModal"
@@ -118,49 +119,18 @@ export default function BalneariosPage() {
 					</div>
 				)}
 
-				{/* Tarjetas de balnearios */}
 				<section
-					className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4"
+					className="flex flex-col gap-4 w-full max-w-5xl mx-auto px-4"
 					role="list"
 					aria-label="Lista de balnearios"
 				>
 					{filteredBalnearios.length > 0 ? (
 						filteredBalnearios.map((balneario: Balneario) => (
-							<article
-								key={balneario.id}
-								className="w-full h-full rounded-2xl border border-gray-200 bg-white shadow-md hover:shadow-lg transition-shadow p-6 flex flex-col justify-between"
-								role="listitem"
-								aria-labelledby={`balneario-${balneario.id}-nombre`}
-							>
-								<div>
-									<h3
-										id={`balneario-${balneario.id}-nombre`}
-										className="text-2xl font-semibold text-primary mb-1"
-									>
-										{balneario.nombre}
-									</h3>
-									<p className="text-sm text-muted-foreground font-medium mb-2">
-										{balneario.localidad}
-									</p>
-									<p className="text-gray-700 text-sm leading-relaxed line-clamp-4">
-										{balneario.descripcion}
-									</p>
-								</div>
-
-								<div className="mt-4">
-									<Link
-										href={`/balnearios/${balneario.id}`}
-										className="inline-block rounded-lg bg-primary hover:bg-blue-900 text-white text-sm font-medium px-4 py-2 transition-colors shadow-sm"
-										aria-label={`Ver más sobre ${balneario.nombre}`}
-									>
-										Ver más
-									</Link>
-								</div>
-							</article>
+							<BalnearioCard balneario={balneario} key={balneario.id} />
 						))
 					) : (
 						<p
-							className="text-gray-500 col-span-full"
+							className="text-gray-500 text-center"
 							role="status"
 							aria-live="polite"
 						>

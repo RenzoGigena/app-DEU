@@ -63,7 +63,7 @@
 }
 
 html {
-  font-size: var(--font-size, 16px);
+	font-size: var(--font-size, 16px);
 }
 
 :root {
@@ -138,35 +138,35 @@ html {
 
 /* Tema verde */
 .theme-green {
-  --primary: #28a745;
-  --secondary: #1e7e34;
-  --accent: #71db84;
+	--primary: #28a745;
+	--secondary: #1e7e34;
+	--accent: #71db84;
 }
 
 /* Tema naranja */
 .theme-orange {
-  --primary: #fd7e14;
-  --secondary: #c05600;
-  --accent: #ffb066;
+	--primary: #fd7e14;
+	--secondary: #c05600;
+	--accent: #ffb066;
 }
 
 /* Tema azul (por si querés explícitamente tenerlo también) */
 .theme-blue {
-  --primary: #007bff;
-  --secondary: #0056b3;
-  --accent: #66bfff;
+	--primary: #007bff;
+	--secondary: #0056b3;
+	--accent: #66bfff;
 }
 
 /* Modo daltónico: alto contraste, colores accesibles */
 .theme-daltonic {
-  --primary: #000000;
-  --secondary: #ffffff;
-  --accent: #ffff00;
-  --background: #fdfdfd;
-  --text: #000;
+	--primary: #000000;
+	--secondary: #ffffff;
+	--accent: #baba05;
+	--background: #fdfdfd;
+	--text: #000;
 }
 
 /* globals.css o styles.css */
 .daltonic-filter {
-  filter: url("#daltonic-filter");
+	filter: url("#daltonic-filter");
 }
