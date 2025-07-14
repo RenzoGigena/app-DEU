@@ -5,7 +5,6 @@ import { useEffect, useState } from "react"
 import { Balneario } from "@/types/balnearios"
 import { BalnearioCard } from "@/components/BalnearioCard"
 import { BalnearioService } from "@/service/balnearioService"
-import Link from "next/link"
 import SolicitudModal from "@/components/SolicitudModal"
 import { useAuth } from "@/helpers/AuthProvider"
 

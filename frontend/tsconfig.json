@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "es5",
+		"target": "esnext",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
@@ -9,14 +9,14 @@
 		"noEmit": true,
 		"esModuleInterop": true,
 		"module": "esnext",
-		"moduleResolution": "bundler",
+		"moduleResolution": "node",
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"jsx": "preserve",
 		"incremental": true,
-		"baseUrl": "src", // Set base directory to src/
+		"baseUrl": ".",
 		"paths": {
-			"@/*": ["*"] // Map @/ to src/
+			"@/*": ["src/*"] // ⚠️ CORREGIDO: antes no apuntaba bien a src/*
 		},
 		"plugins": [
 			{

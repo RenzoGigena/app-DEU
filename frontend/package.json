@@ -8,7 +8,9 @@
 		"start": "next start",
 		"lint": "next lint",
 		"lint:fix": "next lint --fix",
-		"type-check": "tsc --noEmit"
+		"type-check": "tsc --noEmit",
+		"clean": "rimraf .next",
+		"reset": "rimraf .next node_modules package-lock.json && npm install"
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.1.1",

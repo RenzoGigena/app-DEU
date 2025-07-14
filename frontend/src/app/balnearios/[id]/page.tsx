@@ -4,12 +4,14 @@ import DaltonicImage from "@/components/DaltonicImage"
 import Map from "@/components/MapWrapper"
 import { notFound } from "next/navigation"
 
-export default async function BalnearioDetail({
-	params,
-}: {
-	params: { id: string }
-}) {
-	const { id } = await params
+type PageProps = {
+	params: {
+		id: string
+	}
+}
+
+export default async function BalnearioDetail({ params }: PageProps) {
+	const { id } = params
 
 	let balneario: Balneario | null = null
 	try {
