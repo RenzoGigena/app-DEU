@@ -1,0 +1,44 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: appdb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend/balneario-project
+    container_name: backend
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/appdb
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend/balneario-project:/app
+      - /app/node_modules # ✅ volumen anónimo para que instale internamente
+    working_dir: /app
+    command: npm run start:dev
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:3001
+    command: npm run dev
+
+volumes:
+  postgres_data:
