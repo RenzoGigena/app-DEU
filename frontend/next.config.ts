@@ -1,8 +1,22 @@
 import { Configuration } from "webpack"
+import { RemotePattern } from "next/dist/shared/lib/image-config"
 import path from "path"
 import withPWA from "next-pwa"
 
 const isDev = process.env.NODE_ENV === "development"
+
+const remotePatterns: RemotePattern[] = [
+	{
+		protocol: "https",
+		hostname: "**",
+		pathname: "/**",
+	},
+	{
+		protocol: "http",
+		hostname: "**",
+		pathname: "/**",
+	},
+]
 
 const nextConfig = {
 	reactStrictMode: true,
@@ -17,16 +31,7 @@ const nextConfig = {
 		return config
 	},
 	images: {
-		remotePatterns: [
-			{
-				protocol: "https",
-				hostname: "**", // acepta cualquier hostname HTTPS
-			},
-			{
-				protocol: "http",
-				hostname: "**", // acepta cualquier hostname HTTP
-			},
-		],
+		remotePatterns,
 	},
 }
 

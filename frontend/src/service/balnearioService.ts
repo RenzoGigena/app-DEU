@@ -13,7 +13,10 @@ export const BalnearioService = {
 	},
 
 	async findOne(id: string): Promise<Balneario | null> {
-		const res = await fetch(`${BASE_URL}/balnearios/${id}`)
+		console.log("Buscando balneario con id:", BASE_URL)
+		const res = await fetch(`${BASE_URL}/balnearios/${id}`, {
+			cache: "no-store", // 👈 esto es clave
+		})
 		if (!res.ok) throw new Error(`Error al obtener el balneario con id ${id}`)
 		return res.json()
 	},

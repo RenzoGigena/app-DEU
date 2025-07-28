@@ -55,7 +55,7 @@ export function BalnearioCard({ balneario }: Props) {
 
 			{/* Botón lateral */}
 			<Link
-				href={`/balnearios/${balneario.id}`}
+				href={`/balnearios/detalle?id=${balneario.id}`}
 				className={`bg-primary hover:bg-accent text-white text-sm flex-shrink-0 font-medium flex items-center justify-center transition-all duration-200
         ${isSmallScreen ? "w-16 px-3 py-2" : "w-24 px-6 py-2"}
         focus-visible:bg-accent focus-visible:outline-none focus-visible:text-white

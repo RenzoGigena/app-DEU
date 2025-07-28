@@ -1,33 +1,46 @@
+"use client"
+
+import { useEffect, useState } from "react"
+
 import { Balneario } from "@/types/balnearios"
 import { BalnearioService } from "@/service/balnearioService"
 import DaltonicImage from "@/components/DaltonicImage"
 import Map from "@/components/MapWrapper"
 import { notFound } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 
-type PageProps = {
-	params: {
-		id: string
-	}
-}
+export default function DetalleBalnearioClient() {
+	const searchParams = useSearchParams()
+	const id = searchParams!.get("id")
 
-export default async function BalnearioDetail({ params }: PageProps) {
-	const { id } = params
+	const [balneario, setBalneario] = useState<Balneario | null>(null)
+	const [error, setError] = useState<boolean>(false)
+	const [loading, setLoading] = useState<boolean>(true)
 
-	let balneario: Balneario | null = null
-	try {
-		balneario = await BalnearioService.findOne(id)
-	} catch (err) {
-		console.error("Error al obtener balneario:", err)
-		return notFound()
-	}
+	useEffect(() => {
+		if (!id) {
+			setError(true)
+			setLoading(false)
+			return
+		}
 
-	if (!balneario) return notFound()
+		BalnearioService.findOne(id)
+			.then(setBalneario)
+			.catch((err) => {
+				console.error("Error obteniendo balneario:", err)
+				setError(true)
+			})
+			.finally(() => setLoading(false))
+	}, [id])
 
 	const getContaminationLevel = (value: number) => {
 		if (value >= 70) return "Alto"
 		if (value >= 40) return "Medio"
 		return "Bajo"
 	}
+
+	if (loading) return <p className="text-center">Cargando...</p>
+	if (error || !balneario) return notFound()
 
 	return (
 		<main
@@ -54,7 +67,6 @@ export default async function BalnearioDetail({ params }: PageProps) {
 
 				<p className="text-justify">{balneario.descripcion}</p>
 
-				{/* Servicios */}
 				<section aria-labelledby="servicios-title">
 					<h2 id="servicios-title" className="text-2xl font-semibold mt-6">
 						Servicios
@@ -84,7 +96,6 @@ export default async function BalnearioDetail({ params }: PageProps) {
 					</ul>
 				</section>
 
-				{/* Contaminación */}
 				<section aria-labelledby="indices-contaminacion-title" className="mt-6">
 					<h2
 						id="indices-contaminacion-title"
@@ -132,7 +143,6 @@ export default async function BalnearioDetail({ params }: PageProps) {
 					</div>
 				</section>
 
-				{/* Mapa */}
 				<section aria-labelledby="ubicacion-title" className="mt-8">
 					<h2 id="ubicacion-title" className="text-2xl font-semibold mb-2">
 						Ubicación
