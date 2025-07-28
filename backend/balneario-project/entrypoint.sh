@@ -18,3 +18,4 @@ fi
 
 echo "🏁 Iniciando servidor..."
 npm run start:dev
+echo "Servidor iniciado en el puerto 3001."

@@ -24,7 +24,7 @@ services:
     volumes:
       - ./backend/balneario-project:/app
     working_dir: /app
-    command: npm run start:dev
+    entrypoint: ["/app/entrypoint.sh"]
 
   frontend:
     build: ./frontend
