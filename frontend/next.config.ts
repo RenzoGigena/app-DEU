@@ -20,7 +20,11 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: "https",
-				hostname: "imgs.search.brave.com",
+				hostname: "**", // acepta cualquier hostname HTTPS
+			},
+			{
+				protocol: "http",
+				hostname: "**", // acepta cualquier hostname HTTP
 			},
 		],
 	},

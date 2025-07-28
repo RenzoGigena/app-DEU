@@ -89,38 +89,64 @@ export default function SolicitudModal({ onClose }: SolicitudModalProps) {
 		else if (!/^\+?\d{7,15}$/.test(formData.telefono.trim()))
 			newErrors.telefono = "El teléfono debe ser válido (ej: +5491144456677)."
 
-		if (formData.url && !/^https?:\/\/.+\..+$/.test(formData.url.trim()))
-			newErrors.url = "La URL debe tener formato válido (https://...)."
+		// Validación reforzada para URL del sitio
+		if (
+			formData.url &&
+			!/^https?:\/\/(?:www\.)?[a-zA-Z0-9\-]+(\.[a-zA-Z]{2,})+(\/[^\s]*)?$/.test(
+				formData.url.trim()
+			)
+		) {
+			newErrors.url =
+				"La URL del sitio debe tener un formato válido (https://...)."
+		}
 
 		if (!formData.contribuidor.trim())
 			newErrors.contribuidor = "Debes indicar tu nombre o alias."
 
+		// Validación de URL de imagen
 		if (!formData.imagen.trim())
 			newErrors.imagen = "La URL de imagen es requerida."
+		else if (
+			!/^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/i.test(formData.imagen.trim())
+		)
+			newErrors.imagen =
+				"La URL de imagen debe terminar en .jpg, .jpeg, .png, .webp o .gif."
 
 		if (!formData.imagenAlt.trim())
 			newErrors.imagenAlt = "El texto alternativo de imagen es requerido."
 
-		if (isNaN(formData.latitud) || isNaN(formData.longitud))
-			newErrors.latlong = "Latitud y longitud deben ser válidos."
+		// Validación de latitud
+		if (
+			isNaN(formData.latitud) ||
+			formData.latitud < -90 ||
+			formData.latitud > 90
+		)
+			newErrors.latitud = "La latitud debe estar entre -90 y 90."
+
+		// Validación de longitud
+		if (
+			isNaN(formData.longitud) ||
+			formData.longitud < -180 ||
+			formData.longitud > 180
+		)
+			newErrors.longitud = "La longitud debe estar entre -180 y 180."
 
 		if (
 			isNaN(formData.contaminacionAgua) ||
 			formData.contaminacionAgua < 0 ||
 			formData.contaminacionAgua > 100
-		) {
+		)
 			newErrors.contaminacionAgua =
 				"La contaminación del agua debe estar entre 0 y 100."
-		}
 
 		if (
 			isNaN(formData.contaminacionArena) ||
 			formData.contaminacionArena < 0 ||
 			formData.contaminacionArena > 100
-		) {
+		)
 			newErrors.contaminacionArena =
 				"La contaminación de la arena debe estar entre 0 y 100."
-		}
+
 		setErrors(newErrors)
 		return Object.keys(newErrors).length === 0
 	}
