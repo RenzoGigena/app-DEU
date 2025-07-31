@@ -17,5 +17,5 @@ else
 fi
 
 echo "🏁 Iniciando servidor..."
-npm run start:dev
+npm run start
 echo "Servidor iniciado en el puerto 3001."
