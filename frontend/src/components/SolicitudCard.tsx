@@ -1,13 +1,12 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import DaltonicImage from "@/components/DaltonicImage"
 import type { Solicitud } from "@/types/solicitudes"
 
 interface Props {
 	data: Solicitud
-	/** abrir diálogo de Aprobación */
 	onApproveRequest: (id: string) => void
-	/** abrir diálogo de Rechazo */
 	onRejectRequest: (id: string) => void
 }
 
@@ -19,58 +18,108 @@ export function SolicitudCard({
 	return (
 		<article
 			aria-labelledby={`solicitud-${s.id}`}
-			className="border rounded-lg p-4 flex flex-col gap-3 md:flex-row md:items-start shadow-sm"
+			role="article"
+			className="border rounded-lg p-4 shadow-sm grid grid-cols-1 md:grid-cols-3 gap-4"
 		>
-			<div className="flex-1 space-y-1">
-				<h3 id={`solicitud-${s.id}`} className="font-semibold">
+			{/* Columna 1: info básica + imagen */}
+			<div className="space-y-2">
+				<h2 id={`solicitud-${s.id}`} className="font-semibold text-lg">
 					{s.nombreBalneario}
-				</h3>
+				</h2>
+
+				<p className="text-sm text-muted-foreground">
+					Localidad: {s.localidad}
+				</p>
 				<p className="text-sm text-muted-foreground">
 					Contribuidor: {s.contribuidor}
 				</p>
+
+				<DaltonicImage
+					src={s.imagen}
+					alt={s.imagenAlt || `Imagen de ${s.nombreBalneario}`}
+					width={180}
+					height={140}
+					className="w-full max-w-xs object-cover rounded border"
+				/>
+
 				<p className="whitespace-pre-line text-sm">{s.descripcion}</p>
+			</div>
+
+			{/* Columna 2: detalles técnicos y ubicación */}
+			<div className="space-y-2">
 				<p className="text-sm">
-					Servicios:{" "}
-					{s.servicios
-						.filter((s) => s.tiene)
-						.map((m) => {
-							return m.nombreServicio
-						})
-						.join(" ")}
+					<strong>Contaminación del agua:</strong>{" "}
+					<span className="text-blue-900">{s.contaminacionAgua}%</span>
 				</p>
 				<p className="text-sm">
-					Teléfono:{" "}
+					<strong>Contaminación de la arena:</strong>{" "}
+					<span className="text-blue-900">{s.contaminacionArena}%</span>
+				</p>
+
+				<p className="text-sm">
+					<strong>Servicios:</strong>{" "}
+					{s.servicios
+						.filter((servicio) => servicio.tiene)
+						.map((m) => m.nombreServicio)
+						.join(", ") || "Ninguno"}
+				</p>
+
+				<p className="text-sm">
+					<strong>Teléfono:</strong>{" "}
 					<a
 						href={`tel:${s.telefono}`}
 						className="underline focus-visible:outline"
+						tabIndex={-1}
 					>
 						{s.telefono}
 					</a>
 				</p>
+
+				<p className="text-sm">
+					<strong>Sitio web:</strong>{" "}
+					<a
+						href={`https://${s.url}`}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="underline text-primary focus-visible:outline"
+					>
+						{s.url}
+					</a>
+				</p>
+
+				{/* Ver ubicación en Google Maps */}
 				<a
-					href={`https://${s.url}`}
+					href={`https://www.google.com/maps?q=${s.latitud},${s.longitud}`}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="text-sm underline text-primary focus-visible:outline "
+					aria-label={`Ver ubicación en Google Maps de ${s.nombreBalneario}`}
+					tabIndex={-1}
+					className="inline-block mt-2"
 				>
-					{s.url}
+					<Button
+						variant="outline"
+						className="w-full text-blue-700 border-blue-700 hover:bg-blue-50 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black focus-visible:outline-none"
+					>
+						Ver ubicación
+					</Button>
 				</a>
 			</div>
 
-			<div className="flex flex-col gap-2 md:w-40">
+			{/* Columna 3: acciones */}
+			<div className="flex flex-col gap-2 justify-start md:justify-center">
 				<Button
-					className="bg-green-600 hover:bg-green-700 text-white focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none"
-					aria-label="Solicitar confirmación para aprobar"
 					onClick={() => onApproveRequest(s.id)}
+					className="bg-green-600 hover:bg-green-700 text-white focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none"
+					aria-label={`Solicitar confirmación para aprobar solicitud de ${s.nombreBalneario}`}
 				>
 					Aprobar
 				</Button>
 
 				<Button
 					variant="destructive"
-					className="focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none"
-					aria-label="Solicitar motivo de rechazo"
 					onClick={() => onRejectRequest(s.id)}
+					className="focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 focus-visible:outline-none"
+					aria-label={`Solicitar motivo de rechazo para la solicitud de ${s.nombreBalneario}`}
 				>
 					Rechazar
 				</Button>
