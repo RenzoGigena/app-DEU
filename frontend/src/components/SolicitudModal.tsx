@@ -43,6 +43,8 @@ export default function SolicitudModal({ onClose }: SolicitudModalProps) {
 	const modalRef = useRef<HTMLDivElement>(null)
 	useFocusTrap(modalRef)
 
+	const formRef = useRef<HTMLFormElement>(null)
+
 	const [errors, setErrors] = useState<Record<string, string>>({})
 	const [loading, setLoading] = useState(false)
 
@@ -148,6 +150,11 @@ export default function SolicitudModal({ onClose }: SolicitudModalProps) {
 				"La contaminación de la arena debe estar entre 0 y 100."
 
 		setErrors(newErrors)
+
+		if (Object.keys(newErrors).length > 0 && formRef.current) {
+			formRef.current.scrollIntoView({ behavior: "smooth", block: "start" })
+		}
+
 		return Object.keys(newErrors).length === 0
 	}
 
@@ -182,6 +189,7 @@ export default function SolicitudModal({ onClose }: SolicitudModalProps) {
 				ref={modalRef}
 			>
 				<form
+					ref={formRef}
 					onSubmit={handleSubmit}
 					className="bg-white border border-gray-300 p-6 rounded-lg space-y-4 shadow-xl"
 					noValidate

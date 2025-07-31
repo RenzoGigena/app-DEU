@@ -24,7 +24,7 @@ export function BalnearioCard({ balneario }: Props) {
 
 	return (
 		<article
-			className="w-full rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-md transition-shadow flex overflow-hidden"
+			className="w-full rounded-xl border-2 border-blue-500 bg-white shadow-sm hover:shadow-md transition-shadow flex overflow-hidden"
 			role="listitem"
 			aria-labelledby={`balneario-${balneario.id}-nombre`}
 		>
