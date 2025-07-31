@@ -9,12 +9,13 @@ done
 echo "🚀 Aplicando migraciones..."
 npx prisma migrate deploy
 
-if [ ! -f /app/.seeded ]; then
+if [ "$SEED_ENABLED" = "true" ]; then
   echo "🌱 Ejecutando seed..."
-  npm run seed && touch /app/.seeded
+  npm run seed
 else
-  echo "✅ Seed ya ejecutado anteriormente."
+  echo "✅ Seed desactivado por configuración."
 fi
+
 
 echo "🏁 Iniciando servidor..."
 npm run start
